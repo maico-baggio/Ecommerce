@@ -1,11 +1,11 @@
-<a href="/ecommerce/marcas/create"><input type="button" value="Nova Marca" title="Inserir nova marca."></a>	
+<h1>Marcas</h1>
+<a href="/ecommerce/marcas/create"><input type="button" class="btn btn-primary" value="Nova Marca" title="Inserir nova marca."></a>	
 <br><br>
 
 <div class='panel panel-default'>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Descrição</th>
             </tr>
         </thead>
@@ -14,17 +14,14 @@
             foreach ($marcas as $marca) {
                 ?>
                 <tr>
-                    <td><?= $marca->id_marca; ?></td>
                     <td><?= $marca->descricao; ?></td>
 
                     <td> <a href="/ecommerce/marcas/update/id/<?= $marca->id_marca ?>">
-                            <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
+                            <span class="glyphicon glyphicon-pencil" title="Editar registro"></span> </a></td>
 
-                    <td> <a href="/ecommerce/marcas/delete/id/<?= $marca->id_marca ?>">
-                            <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
-
+                    <td><a href="/ecommerce/marcas/delete/id/<?= $marca->id_marca ?>">
+                            <span class="glyphicon glyphicon-trash" title="Excluir registro"></span> </a></td>
                 </tr>
-
             <?php } ?>
         </tbody>
     </table>

@@ -5,15 +5,15 @@ namespace Ecommerce\Form;
 use Zend\Form\Form;
 
 /**
- * Form para cadastrar categoriass
+ * Form para cadastrar tipo de endereco
  * @category Ecommerce
  * @package form
  * @author Maico Baggio <maico.baggio@unochapeco.edu.br>
  */
-class CategoriaForm extends Form {
+class TipoEnderecoForm extends Form {
 
     public function __construct() {
-        parent::__construct('CategoriaForm');
+        parent::__construct('TipoEnderecoForm');
         $this->setAttribute('method', 'POST');
         $this->add(
                 array(
@@ -26,11 +26,10 @@ class CategoriaForm extends Form {
                     'name' => 'descricao',
                     'type' => 'text',
                     'options' => array(
-                        'label' => 'Descrição da categoria*:'
+                        'label' => 'Descrição do endereço*:'
                     ),
                     'attributes' => array(
-                        'placeholder' => 'Informe a categoria aqui',
-                        'class' => 'form-control'
+                        'placeholder' => 'Informe um tipo de endereço'
                     ),
                 )
         );

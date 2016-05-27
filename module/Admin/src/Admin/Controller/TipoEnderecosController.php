@@ -2,9 +2,9 @@
 
 namespace Ecommerce\Controller;
 
-use Ecommerce\Entity\Marca;
-use Ecommerce\Form\MarcaForm;
-use Ecommerce\Validator\MarcaValidator;
+use Ecommerce\Entity\TipoEndereco;
+use Ecommerce\Form\TipoEnderecoForm;
+use Ecommerce\Validator\TipoEnderecoValidator;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
@@ -16,58 +16,54 @@ use Zend\Paginator\Paginator;
  *
  * @category Ecommerce
  * @package Controller
- * @author  Maico <e-mail>
+ * @author  Maico Baggio <maico.baggio@unochapeco.edu.br>
  */
-class MarcasController extends AbstractActionController {
+class TipoEnderecosController extends AbstractActionController {
 
     public function indexAction() {
         $page = (int) $_GET['page'];
+
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $select = $entityManager->createQueryBuilder()
-                ->select('Marca')
-                ->from('Ecommerce\Entity\Marca', 'Marca')
-                ->orderBy('Marca.descricao', 'ASC');
+                ->select('TipoEndereco')
+                ->from('Ecommerce\Entity\TipoEndereco', 'TipoEndereco')
+                ->orderBy('TipoEndereco.descricao', 'ASC');
 
         $adapter = new DoctrineAdapter(new ORMPaginator($select));
         $paginator = new Paginator($adapter);
         $paginator->setDefaultItemCountPerPage(ItensPerPage);
 
-        if ($page > 0)
+        if ($page > 0) {
             $paginator->setCurrentPageNumber($page);
+        }
 
         return new ViewModel(
-                array('marcas' => $paginator)
+                array('tipoEnderecos' => $paginator)
         );
     }
 
     public function createAction() {
-        $form = new MarcaForm();
+        $form = new TipoEnderecoForm();
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            $validator = new MarcaValidator();
+            $validator = new TipoEnderecoValidator();
             $form->setInputFilter($validator);
             $values = $request->getPost();
             $form->setData($values);
 
             if ($form->isValid()) {
                 $values = $form->getData();
-                $marca = new Marca();
-                $marca->descricao = $values['descricao'];
+                $tipoEndereco = new TipoEndereco();
+                $tipoEndereco->descricao = $values['descricao'];
                 $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-                $entityManager->persist($marca);
+                $entityManager->persist($tipoEndereco);
+                $entityManager->flush();
 
-                try {
-                    $entityManager->flush();
-                    $this->flashMessenger()->addSuccessMessage('Marca cadastrada com sucesso.');
-                    return $this->redirect()->toUrl('/ecommerce/marcas/index');
-                } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage('Erro ao cadastrar marca.');
-                }
-
-                //return $this->redirect()->toUrl('/ecommerce/marcas');
+                return $this->redirect()->toUrl('/ecommerce/tipo-enderecos');
             }
         }
+
         return new ViewModel(array(
             'form' => $form
         ));
@@ -80,20 +76,19 @@ class MarcasController extends AbstractActionController {
 
         if ($request->isPost()) {
             $values = $request->getPost();
-            $marca = $entityManager->find('\Ecommerce\Entity\Marca', $id);
-            $marca->descricao = $values['descricao'];
+            $tipoEndereco = $entityManager->find('\Ecommerce\Entity\TipoEndereco', $id);
+            $tipoEndereco->descricao = $values['descricao'];
             $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-            $entityManager->persist($marca);
+            $entityManager->persist($tipoEndereco);
             $entityManager->flush();
 
-            return $this->redirect()->toUrl('/ecommerce/marcas');
+            return $this->redirect()->toUrl('/ecommerce/tipo-enderecos');
         }
 
         if ($id > 0) {
-            $form = new MarcaForm();
-            $marca = $entityManager->find('\Ecommerce\Entity\Marca', $id);
-            $form->bind($marca);
-
+            $form = new TipoEnderecoForm();
+            $tipoEndereco = $entityManager->find('\Ecommerce\Entity\TipoEndereco', $id);
+            $form->bind($tipoEndereco);
             return new ViewModel(array('form' => $form));
         }
 
@@ -104,11 +99,11 @@ class MarcasController extends AbstractActionController {
     public function deleteAction() {
         $id = $this->params()->fromRoute('id', 0);
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $marca = $entityManager->find('\Ecommerce\Entity\Marca', $id);
-        $entityManager->remove($marca);
+        $tipoEndereco = $entityManager->find('\Ecommerce\Entity\TipoEndereco', $id);
+        $entityManager->remove($tipoEndereco);
         $entityManager->flush();
 
-        return $this->redirect()->toUrl('/ecommerce/marcas');
+        return $this->redirect()->toUrl('/ecommerce/tipo-enderecos');
     }
 
 }

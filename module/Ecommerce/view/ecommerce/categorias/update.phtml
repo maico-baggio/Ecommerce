@@ -1,5 +1,37 @@
 <?php
+$title = 'Adicionar nova categoria';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+
+$form->prepare();
+
 echo $this->form()->openTag($form);
-echo $this->formCollection($form);
-echo $this->form()->closeTag();
+echo $this->formHidden($form->get('id'));
+?>
+
+<div class="form_element">
+    <?php
+    $descricao = $form->get('descricao');
+    echo $this->formRow($descricao);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $salvar = $form->get('salvar');
+    echo $this->formRow($salvar);
+    ?>
+</div>
+
+
+
+
+<?php
+//echo $this->form()->openTag($form);
+//echo $this->formCollection($form);
+//echo $this->form()->closeTag();
 ?>

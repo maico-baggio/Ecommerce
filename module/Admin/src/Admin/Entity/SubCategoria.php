@@ -6,15 +6,22 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Model Marca
+ * Entity SubCategoria
  * @category Ecommerce
  * @package Entity
- * @author Maico <e-mail>
- * @ORM\Entity
- * @ORM\Table (name = "marca")
+ * @author Maico Baggio <maico.baggio@unochapeco.edu.br>
  */
-class Marca {
 
+/**
+ * @ORM\Entity
+ * @ORM\Table (name = "sub_categoria")
+ *
+ * @author  Maico.baggio <maico.baggio@unochapeco.edu.br
+ * @category Ecommerce
+ * @package Entity
+ */
+class SubCategoria
+{
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,7 +29,7 @@ class Marca {
      *
      * @var int
      */
-    protected $id_marca;
+    protected $id_sub_categoria;
 
     /**
      * @ORM\Column(type="string")
@@ -32,26 +39,29 @@ class Marca {
     protected $descricao;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produto", mappedBy="marca")
+     * @ORM\OneToMany(targetEntity="Produto", mappedBy="sub_categoria")
      *
      * @var ArrayCollection $produtos
      */
     protected $produtos;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->produtos = new ArrayCollection();
     }
 
-    public function getArrayCopy() {
+    public function getArrayCopy()
+    {
         return get_object_vars($this);
     }
 
-    public function __set($name, $value) {
+    public function __set($name, $value)
+    {
         $this->$name = $value;
     }
 
-    public function __get($name) {
+    public function __get($name)
+    {
         return $this->$name;
     }
-
 }

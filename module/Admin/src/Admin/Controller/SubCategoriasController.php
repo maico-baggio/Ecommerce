@@ -2,9 +2,9 @@
 
 namespace Ecommerce\Controller;
 
-use Ecommerce\Entity\Marca;
-use Ecommerce\Form\MarcaForm;
-use Ecommerce\Validator\MarcaValidator;
+use Ecommerce\Entity\SubCategoria;
+use Ecommerce\Form\SubCategoriaForm;
+use Ecommerce\Validator\SubCategoriaValidator;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
@@ -16,58 +16,54 @@ use Zend\Paginator\Paginator;
  *
  * @category Ecommerce
  * @package Controller
- * @author  Maico <e-mail>
+ * @author  Maico Baggio <maico.baggio@unochapeco.edu.br>
  */
-class MarcasController extends AbstractActionController {
+class SubCategoriasController extends AbstractActionController {
 
     public function indexAction() {
         $page = (int) $_GET['page'];
+
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $select = $entityManager->createQueryBuilder()
-                ->select('Marca')
-                ->from('Ecommerce\Entity\Marca', 'Marca')
-                ->orderBy('Marca.descricao', 'ASC');
+                ->select('SubCategoria')
+                ->from('Ecommerce\Entity\SubCategoria', 'SubCategoria')
+                ->orderBy('SubCategoria.descricao', 'ASC');
 
         $adapter = new DoctrineAdapter(new ORMPaginator($select));
         $paginator = new Paginator($adapter);
         $paginator->setDefaultItemCountPerPage(ItensPerPage);
 
-        if ($page > 0)
+        if ($page > 0) {
             $paginator->setCurrentPageNumber($page);
+        }
 
         return new ViewModel(
-                array('marcas' => $paginator)
+                array('subCategorias' => $paginator)
         );
     }
 
     public function createAction() {
-        $form = new MarcaForm();
+        $form = new SubCategoriaForm();
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            $validator = new MarcaValidator();
+            $validator = new SubCategoriaValidator();
             $form->setInputFilter($validator);
             $values = $request->getPost();
             $form->setData($values);
 
             if ($form->isValid()) {
                 $values = $form->getData();
-                $marca = new Marca();
-                $marca->descricao = $values['descricao'];
+                $subCategoria = new SubCategoria();
+                $subCategoria->descricao = $values['descricao'];
                 $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-                $entityManager->persist($marca);
+                $entityManager->persist($subCategoria);
+                $entityManager->flush();
 
-                try {
-                    $entityManager->flush();
-                    $this->flashMessenger()->addSuccessMessage('Marca cadastrada com sucesso.');
-                    return $this->redirect()->toUrl('/ecommerce/marcas/index');
-                } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage('Erro ao cadastrar marca.');
-                }
-
-                //return $this->redirect()->toUrl('/ecommerce/marcas');
+                return $this->redirect()->toUrl('/ecommerce/sub-categorias');
             }
         }
+
         return new ViewModel(array(
             'form' => $form
         ));
@@ -80,20 +76,19 @@ class MarcasController extends AbstractActionController {
 
         if ($request->isPost()) {
             $values = $request->getPost();
-            $marca = $entityManager->find('\Ecommerce\Entity\Marca', $id);
-            $marca->descricao = $values['descricao'];
+            $subCategoria = $entityManager->find('\Ecommerce\Entity\SubCategoria', $id);
+            $subCategoria->descricao = $values['descricao'];
             $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-            $entityManager->persist($marca);
+            $entityManager->persist($subCategoria);
             $entityManager->flush();
 
-            return $this->redirect()->toUrl('/ecommerce/marcas');
+            return $this->redirect()->toUrl('/ecommerce/sub-categorias');
         }
 
         if ($id > 0) {
-            $form = new MarcaForm();
-            $marca = $entityManager->find('\Ecommerce\Entity\Marca', $id);
-            $form->bind($marca);
-
+            $form = new SubCategoriaForm();
+            $subCategoria = $entityManager->find('\Ecommerce\Entity\SubCategoria', $id);
+            $form->bind($subCategoria);
             return new ViewModel(array('form' => $form));
         }
 
@@ -104,11 +99,11 @@ class MarcasController extends AbstractActionController {
     public function deleteAction() {
         $id = $this->params()->fromRoute('id', 0);
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $marca = $entityManager->find('\Ecommerce\Entity\Marca', $id);
-        $entityManager->remove($marca);
+        $subCategoria = $entityManager->find('\Ecommerce\Entity\SubCategoria', $id);
+        $entityManager->remove($subCategoria);
         $entityManager->flush();
 
-        return $this->redirect()->toUrl('/ecommerce/marcas');
+        return $this->redirect()->toUrl('/ecommerce/sub-categorias');
     }
 
 }

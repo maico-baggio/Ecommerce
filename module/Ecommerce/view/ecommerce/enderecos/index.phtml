@@ -1,0 +1,54 @@
+<a href="/ecommerce/enderecos/create"><input type="button" value="Novo Endereço" title="Inserir novo endereço."></a>	
+<br><br>
+
+<div class='panel panel-default'>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome do destinatário</th>
+                <th>Tipo Endereco</th>
+                <th>CEP</th>
+                <th>Endereco</th>
+                <th>Numero</th>
+                <th>Complemento</th>
+                <th>Informação de referencia</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($enderecos as $endereco) {
+                ?>
+                <tr>
+
+                    <td><?= $endereco->nome_do_destinatario; ?></td>
+                    <td><?= $endereco->tipo_endereco->descricao; ?></td>
+                    <td><?= $endereco->cep; ?></td>
+                    <td><?= $endereco->endereco; ?></td>
+                    <td><?= $endereco->numero; ?></td>
+                    <td><?= $endereco->complemento; ?></td>
+                    <td><?= $endereco->informacao_referencia; ?></td>
+                    <td><?= $endereco->bairro; ?></td>
+                    <td><?= $endereco->cidade; ?></td>
+                    <td><?= $endereco->estado; ?></td>
+
+                    <td> <a href="/ecommerce/produtos/update/id/<?= $endereco->id_endereco ?>">
+                            <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
+
+                    <td> <a href="/ecommerce/produtos/delete/id/<?= $endereco->id_endereco ?>">
+                            <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+<?php
+echo $this->paginationControl(
+        $enderecos, 'sliding', 'partial/paginator.phtml', array(
+    'route' => 'produtos'
+        )
+);
+?>
+

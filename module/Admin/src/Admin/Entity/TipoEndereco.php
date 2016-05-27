@@ -2,18 +2,18 @@
 
 namespace Ecommerce\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Model Marca
+ * @ORM\Entity
+ * @ORM\Table (name = "tipo_endereco")
+ *
+ * @author  Maico.baggio <maico.baggio@unochapeco.edu.br
  * @category Ecommerce
  * @package Entity
- * @author Maico <e-mail>
- * @ORM\Entity
- * @ORM\Table (name = "marca")
  */
-class Marca {
+class TipoEndereco {
 
     /**
      * @ORM\Id
@@ -22,7 +22,7 @@ class Marca {
      *
      * @var int
      */
-    protected $id_marca;
+    protected $id_tipo_endereco;
 
     /**
      * @ORM\Column(type="string")
@@ -32,14 +32,14 @@ class Marca {
     protected $descricao;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produto", mappedBy="marca")
+     * @ORM\OneToMany(targetEntity="Endereco", mappedBy="tipo_endereco")
      *
-     * @var ArrayCollection $produtos
+     * @var ArrayCollection $enderecos
      */
-    protected $produtos;
+    protected $enderecos;
 
     public function __construct() {
-        $this->produtos = new ArrayCollection();
+        $this->enderecos = new ArrayCollection();
     }
 
     public function getArrayCopy() {
