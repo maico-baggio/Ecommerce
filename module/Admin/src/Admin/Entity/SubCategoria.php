@@ -1,13 +1,13 @@
 <?php
 
-namespace Ecommerce\Entity;
+namespace Admin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Entity SubCategoria
- * @category Ecommerce
+ * @category Admin
  * @package Entity
  * @author Maico Baggio <maico.baggio@unochapeco.edu.br>
  */
@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table (name = "sub_categoria")
  *
  * @author  Maico.baggio <maico.baggio@unochapeco.edu.br
- * @category Ecommerce
+ * @category Admin
  * @package Entity
  */
 class SubCategoria

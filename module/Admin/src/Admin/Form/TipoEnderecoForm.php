@@ -1,12 +1,12 @@
 <?php
 
-namespace Ecommerce\Form;
+namespace Admin\Form;
 
 use Zend\Form\Form;
 
 /**
  * Form para cadastrar tipo de endereco
- * @category Ecommerce
+ * @category Admin
  * @package form
  * @author Maico Baggio <maico.baggio@unochapeco.edu.br>
  */

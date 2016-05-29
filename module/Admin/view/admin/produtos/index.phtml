@@ -1,4 +1,4 @@
-<a href="/ecommerce/produtos/create"><input type="button" value="Novo Produto" title="Inserir novo produto."></a>	
+<a href="/admin/produtos/create"><input type="button" value="Novo Produto" title="Inserir novo produto."></a>	
 <br><br>
 
 <div class='panel panel-default'>
@@ -35,10 +35,10 @@
                     <td><?= $produto->valor; ?></td>
                     <td><?= $produto->margem_de_lucro; ?></td>
 
-                    <td> <a href="/ecommerce/produtos/update/id/<?= $produto->id_produto ?>">
+                    <td> <a href="/admin/produtos/update/id/<?= $produto->id_produto ?>">
                             <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
 
-                    <td> <a href="/ecommerce/produtos/delete/id/<?= $produto->id_produto ?>">
+                    <td> <a href="/admin/produtos/delete/id/<?= $produto->id_produto ?>">
                             <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
                 </tr>
             <?php } ?>

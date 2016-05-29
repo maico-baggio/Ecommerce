@@ -1,12 +1,12 @@
 <?php
 
-namespace Ecommerce\Form;
+namespace Admin\Form;
 
 use Zend\Form\Form;
 
 /**
  * Form para cadastrar marca
- * @category Ecommerce
+ * @category Admin
  * @package form
  * @author Maico <e-mail>
  */
@@ -49,7 +49,7 @@ class MarcaForm extends Form {
             'attributes' => array(
                 'value' => 'Cancelar',
                 'class' => 'btn',
-                'onclick' => "location.href='/ecommerce/marcas/index'",
+                'onclick' => "location.href='/admin/marcas/index'",
                 'title' => 'Cancelar'
             ),
             'options' => array(

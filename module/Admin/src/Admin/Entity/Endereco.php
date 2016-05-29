@@ -1,13 +1,13 @@
 <?php
 
-namespace Ecommerce\Entity;
+namespace Admin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Model Endereco
- * @category Ecommerce
+ * @category Admin
  * @package Entity
  * @author Maico
  */
@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table (name = "endereco")
  *
  * @author  Maico.baggio <maico.baggio@unochapeco.edu.br
- * @category Ecommerce
+ * @category Admin
  * @package Entity
  */
 class Endereco {
@@ -86,6 +86,13 @@ class Endereco {
      * @var string $cidade
      */
     protected $cidade;
+
+        /**
+     * @ORM\Column(type="string")
+     *
+     * @var string $telefone
+     */
+    protected $telefone;
 
     /**
      * @ORM\Column(type="string")

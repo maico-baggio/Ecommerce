@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecommerce\Validator;
+namespace Admin\Validator;
 
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
@@ -31,7 +31,7 @@ class MarcaValidator extends InputFilter {
                             'name' => 'StringLength',
                             'options' => array(
                                 'encoding' => 'UTF-8',
-                                'min' => 3,
+                                'min' => 2,
                                 'max' => 255,
                             ),
                         ),

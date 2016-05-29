@@ -1,10 +1,10 @@
 <?php
 
-namespace Ecommerce\Controller;
+namespace Admin\Controller;
 
-use Ecommerce\Entity\Categoria;
-use Ecommerce\Form\CategoriaForm;
-use Ecommerce\Validator\CategoriaValidator;
+use Admin\Entity\Categoria;
+use Admin\Form\CategoriaForm;
+use Admin\Validator\CategoriaValidator;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
@@ -14,7 +14,7 @@ use Zend\Paginator\Paginator;
 /**
  * Controlador para cadastrar novas categorias.
  *
- * @category Ecommerce
+ * @category Admin
  * @package Controller
  * @author  Maico <e-amil>
  */
@@ -26,7 +26,7 @@ class CategoriasController extends AbstractActionController {
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $select = $entityManager->createQueryBuilder()
                 ->select('Categoria')
-                ->from('Ecommerce\Entity\Categoria', 'Categoria')
+                ->from('Admin\Entity\Categoria', 'Categoria')
                 ->orderBy('Categoria.descricao', 'ASC');
 
         $adapter = new DoctrineAdapter(new ORMPaginator($select));
@@ -58,7 +58,7 @@ class CategoriasController extends AbstractActionController {
                 $entityManager->persist($categoria);
                 $entityManager->flush();
 
-                return $this->redirect()->toUrl('/ecommerce/categorias');
+                return $this->redirect()->toUrl('/admin/categorias');
             }
         }
         return new ViewModel(array(
@@ -73,18 +73,18 @@ class CategoriasController extends AbstractActionController {
 
         if ($request->isPost()) {
             $values = $request->getPost();
-            $categoria = $entityManager->find('\Ecommerce\Entity\Categoria', $id);
+            $categoria = $entityManager->find('\Admin\Entity\Categoria', $id);
             $categoria->descricao = $values['descricao'];
             $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
             $entityManager->persist($categoria);
             $entityManager->flush();
 
-            return $this->redirect()->toUrl('/ecommerce/categorias');
+            return $this->redirect()->toUrl('/admin/categorias');
         }
 
         if ($id > 0) {
             $form = new CategoriaForm();
-            $categoria = $entityManager->find('\Ecommerce\Entity\Categoria', $id);
+            $categoria = $entityManager->find('\Admin\Entity\Categoria', $id);
             $form->bind($categoria);
 
             return new ViewModel(array('form' => $form));
@@ -98,11 +98,18 @@ class CategoriasController extends AbstractActionController {
     public function deleteAction() {
         $id = $this->params()->fromRoute('id', 0);
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $categoria = $entityManager->find('\Ecommerce\Entity\Categoria', $id);
+        $categoria = $entityManager->find('\Admin\Entity\Categoria', $id);
         $entityManager->remove($categoria);
-        $entityManager->flush();
 
-        return $this->redirect()->toUrl('/ecommerce/categorias');
+        try {
+            $entityManager->flush();
+            $this->flashMessenger()->addSuccessMessage('Categoria excluída com sucesso.');
+            return $this->redirect()->toUrl('/admin/categorias');
+        } catch (\Exception $e) {
+            $this->flashMessenger()->addErrorMessage('Erro ao excluir categoria, verifique os vinculos ou contate o administrador.');
+            return $this->redirect()->toUrl('/admin/categorias');
+        }
+        
     }
 
 }

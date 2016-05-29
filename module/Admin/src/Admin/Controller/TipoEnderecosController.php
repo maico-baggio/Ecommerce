@@ -1,10 +1,10 @@
 <?php
 
-namespace Ecommerce\Controller;
+namespace Admin\Controller;
 
-use Ecommerce\Entity\TipoEndereco;
-use Ecommerce\Form\TipoEnderecoForm;
-use Ecommerce\Validator\TipoEnderecoValidator;
+use Admin\Entity\TipoEndereco;
+use Admin\Form\TipoEnderecoForm;
+use Admin\Validator\TipoEnderecoValidator;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
@@ -14,7 +14,7 @@ use Zend\Paginator\Paginator;
 /**
  * Controlador para cadastrar novas marcas.
  *
- * @category Ecommerce
+ * @category Admin
  * @package Controller
  * @author  Maico Baggio <maico.baggio@unochapeco.edu.br>
  */
@@ -26,7 +26,7 @@ class TipoEnderecosController extends AbstractActionController {
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $select = $entityManager->createQueryBuilder()
                 ->select('TipoEndereco')
-                ->from('Ecommerce\Entity\TipoEndereco', 'TipoEndereco')
+                ->from('Admin\Entity\TipoEndereco', 'TipoEndereco')
                 ->orderBy('TipoEndereco.descricao', 'ASC');
 
         $adapter = new DoctrineAdapter(new ORMPaginator($select));
@@ -60,7 +60,7 @@ class TipoEnderecosController extends AbstractActionController {
                 $entityManager->persist($tipoEndereco);
                 $entityManager->flush();
 
-                return $this->redirect()->toUrl('/ecommerce/tipo-enderecos');
+                return $this->redirect()->toUrl('/admin/tipo-enderecos');
             }
         }
 
@@ -76,18 +76,18 @@ class TipoEnderecosController extends AbstractActionController {
 
         if ($request->isPost()) {
             $values = $request->getPost();
-            $tipoEndereco = $entityManager->find('\Ecommerce\Entity\TipoEndereco', $id);
+            $tipoEndereco = $entityManager->find('\Admin\Entity\TipoEndereco', $id);
             $tipoEndereco->descricao = $values['descricao'];
             $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
             $entityManager->persist($tipoEndereco);
             $entityManager->flush();
 
-            return $this->redirect()->toUrl('/ecommerce/tipo-enderecos');
+            return $this->redirect()->toUrl('/admin/tipo-enderecos');
         }
 
         if ($id > 0) {
             $form = new TipoEnderecoForm();
-            $tipoEndereco = $entityManager->find('\Ecommerce\Entity\TipoEndereco', $id);
+            $tipoEndereco = $entityManager->find('\Admin\Entity\TipoEndereco', $id);
             $form->bind($tipoEndereco);
             return new ViewModel(array('form' => $form));
         }
@@ -99,11 +99,11 @@ class TipoEnderecosController extends AbstractActionController {
     public function deleteAction() {
         $id = $this->params()->fromRoute('id', 0);
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $tipoEndereco = $entityManager->find('\Ecommerce\Entity\TipoEndereco', $id);
+        $tipoEndereco = $entityManager->find('\Admin\Entity\TipoEndereco', $id);
         $entityManager->remove($tipoEndereco);
         $entityManager->flush();
 
-        return $this->redirect()->toUrl('/ecommerce/tipo-enderecos');
+        return $this->redirect()->toUrl('/admin/tipo-enderecos');
     }
 
 }

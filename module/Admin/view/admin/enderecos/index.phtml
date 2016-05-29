@@ -1,4 +1,4 @@
-<a href="/ecommerce/enderecos/create"><input type="button" value="Novo Endereço" title="Inserir novo endereço."></a>	
+<a href="/admin/enderecos/create"><input type="button" value="Novo Endereço" title="Inserir novo endereço."></a>	
 <br><br>
 
 <div class='panel panel-default'>
@@ -34,10 +34,10 @@
                     <td><?= $endereco->cidade; ?></td>
                     <td><?= $endereco->estado; ?></td>
 
-                    <td> <a href="/ecommerce/produtos/update/id/<?= $endereco->id_endereco ?>">
+                    <td> <a href="/admin/produtos/update/id/<?= $endereco->id_endereco ?>">
                             <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
 
-                    <td> <a href="/ecommerce/produtos/delete/id/<?= $endereco->id_endereco ?>">
+                    <td> <a href="/admin/produtos/delete/id/<?= $endereco->id_endereco ?>">
                             <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
                 </tr>
             <?php } ?>

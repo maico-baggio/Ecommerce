@@ -1,14 +1,14 @@
 <?php
 
-namespace Ecommerce\Form;
+namespace Admin\Form;
 
 use Zend\Form\Form;
 
 /**
  * Form para cadastrar categoriass
- * @category Ecommerce
+ * @category Admin
  * @package form
- * @author Maico Baggio <maico.baggio@unochapeco.edu.br>
+ * @author Maico <e-mail>
  */
 class CategoriaForm extends Form {
 
@@ -35,11 +35,24 @@ class CategoriaForm extends Form {
                 )
         );
         $this->add(array(
-            'name' => 'Salvar',
+            'name' => 'salvar',
             'type' => 'submit',
             'attributes' => array(
                 'value' => 'Salvar',
                 'class' => 'btn btn-primary'
+            )
+        ));
+        $this->add(array(
+            'type' => 'button',
+            'name' => 'cancelar',
+            'attributes' => array(
+                'value' => 'Cancelar',
+                'class' => 'btn',
+                'onclick' => "location.href='/admin/categorias/index'",
+                'title' => 'Cancelar'
+            ),
+            'options' => array(
+                'label' => 'Cancelar'
             )
         ));
     }

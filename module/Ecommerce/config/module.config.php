@@ -58,72 +58,7 @@ return array(
 //                    ),
 //                ),
 //            ),
-            //Paginator Controller Marcas
-            'marcas' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/ecommerce/marcas/index[page/:page]',
-                    //'route' => '/ecommerce/marcas/',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Ecommerce\Controller',
-                        'controller' => 'Marcas',
-                        'action' => 'index',
-                        'page' => 1,
-                    ),
-                ),
-            ),
-            'categorias' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/ecommerce/categorias/index[page/:page]',
-                    //'route' => '/ecommerce/marcas/',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Ecommerce\Controller',
-                        'controller' => 'Categorias',
-                        'action' => 'index',
-                        'page' => 1,
-                    ),
-                ),
-            ),
-            'produtos' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/ecommerce/produtos/index[page/:page]',
-                    //'route' => '/ecommerce/marcas/',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Ecommerce\Controller',
-                        'controller' => 'Produtos',
-                        'action' => 'index',
-                        'page' => 1,
-                    ),
-                ),
-            ),
-            'tipoEndereco' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/ecommerce/tipo-enderecos/index[page/:page]',
-                    //'route' => '/ecommerce/marcas/',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Ecommerce\Controller',
-                        'controller' => 'TipoEnderecos',
-                        'action' => 'index',
-                        'page' => 1,
-                    ),
-                ),
-            ),
-            'subCategoria' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/ecommerce/sub-categorias/index[page/:page]',
-                    //'route' => '/ecommerce/marcas/',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Ecommerce\Controller',
-                        'controller' => 'SubCategorias',
-                        'action' => 'index',
-                        'page' => 1,
-                    ),
-                ),
-            ),
+
         ),
     ),
     'doctrine' => array(
@@ -159,13 +94,13 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Ecommerce\Controller\Index' => Controller\IndexController::class,
-            'Ecommerce\Controller\Categorias' => Controller\CategoriasController::class,
-            'Ecommerce\Controller\Produtos' => Controller\ProdutosController::class,
-            'Ecommerce\Controller\Marcas' => Controller\MarcasController::class,
-            'Ecommerce\Controller\TipoEnderecos' => Controller\TipoEnderecosController::class,
-            'Ecommerce\Controller\SubCategorias' => Controller\SubCategoriasController::class,
-            'Ecommerce\Controller\Enderecos' => Controller\EnderecosController::class,
+            //'Ecommerce\Controller\Index' => Controller\IndexController::class,
+//            'Ecommerce\Controller\Categorias' => Controller\CategoriasController::class,
+//            'Ecommerce\Controller\Produtos' => Controller\ProdutosController::class,
+//            'Ecommerce\Controller\Marcas' => Controller\MarcasController::class,
+//            'Ecommerce\Controller\TipoEnderecos' => Controller\TipoEnderecosController::class,
+//            'Ecommerce\Controller\SubCategorias' => Controller\SubCategoriasController::class,
+//            'Ecommerce\Controller\Enderecos' => Controller\EnderecosController::class,
         ),
     ),
     'view_manager' => array(
@@ -185,10 +120,10 @@ return array(
         ),
     ),
     // Placeholder for console routes
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-            ),
-        ),
-    ),
+//    'console' => array(
+//        'router' => array(
+//            'routes' => array(
+//            ),
+//        ),
+//    ),
 );

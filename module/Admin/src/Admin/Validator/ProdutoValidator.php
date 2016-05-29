@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecommerce\Validator;
+namespace Admin\Validator;
 
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;

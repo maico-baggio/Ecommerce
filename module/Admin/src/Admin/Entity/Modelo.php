@@ -1,13 +1,13 @@
 <?php
 
-namespace Ecommerce\Entity;
+namespace Admin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Model Modelo
- * @category Ecommerce
+ * @category Admin
  * @package Entity
  * @author Maico
  */
@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table (name = "modelo")
  *
  * @author  Maico.baggio <maico.baggio@unochapeco.edu.br
- * @category Ecommerce
+ * @category Admin
  * @package Entity
  */
 class Modelo {

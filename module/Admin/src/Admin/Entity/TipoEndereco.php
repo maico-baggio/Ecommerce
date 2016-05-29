@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecommerce\Entity;
+namespace Admin\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table (name = "tipo_endereco")
  *
  * @author  Maico.baggio <maico.baggio@unochapeco.edu.br
- * @category Ecommerce
+ * @category Admin
  * @package Entity
  */
 class TipoEndereco {

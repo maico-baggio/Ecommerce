@@ -7,14 +7,14 @@
  * Time: 21:35
  */
 
-namespace Ecommerce\Form;
+namespace Admin\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter;
 
 /**
  * Form para cadastrar produtos
- * @category Ecommerce
+ * @category Admin
  * @package form
  * @author Maico Baggio <maico.baggio@unochapeco.edu.br>
  */
@@ -85,7 +85,7 @@ class ProdutoForm extends Form {
             'options' => array(
                 'label' => 'Marca*:',
                 'object_manager' => $em,
-                'target_class' => '\Ecommerce\Entity\Marca',
+                'target_class' => '\Admin\Entity\Marca',
                 'property' => 'descricao',
                 'empty_option' => 'SELECIONE UMA MARCA',
                 'label_generator' => function($target) {
@@ -100,7 +100,7 @@ class ProdutoForm extends Form {
             'options' => array(
                 'label' => 'Modelos*:',
                 'object_manager' => $em,
-                'target_class' => '\Ecommerce\Entity\Modelo',
+                'target_class' => '\Admin\Entity\Modelo',
                 'property' => 'descricao',
                 'empty_option' => 'SELECIONE UM MODELO',
                 'label_generator' => function($target) {
@@ -115,7 +115,7 @@ class ProdutoForm extends Form {
             'options' => array(
                 'label' => 'Categorias*:',
                 'object_manager' => $em,
-                'target_class' => '\Ecommerce\Entity\Categoria',
+                'target_class' => '\Admin\Entity\Categoria',
                 'property' => 'descricao',
                 'empty_option' => 'SELECIONE UMA CATEGORIA',
                 'label_generator' => function($target) {
@@ -130,7 +130,7 @@ class ProdutoForm extends Form {
             'options' => array(
                 'label' => 'Sub Categoria*:',
                 'object_manager' => $em,
-                'target_class' => '\Ecommerce\Entity\SubCategoria',
+                'target_class' => '\Admin\Entity\SubCategoria',
                 'property' => 'descricao',
                 'empty_option' => 'SELECIONE UMA SUB CATEGORIA',
                 'label_generator' => function($target) {

@@ -22,7 +22,10 @@ echo $this->formHidden($form->get('id'));
 
 <div class="form_element">
     <?php
-    $salvar = $form->get('Salvar');
+    $salvar = $form->get('salvar');
     echo $this->formRow($salvar);
+
+    $cancelar = $form->get('cancelar');
+    echo $this->formRow($cancelar);
     ?>
 </div>

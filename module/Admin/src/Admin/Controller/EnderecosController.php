@@ -1,12 +1,12 @@
 <?php
 
-namespace Ecommerce\Controller;
+namespace Admin\Controller;
 
-use Ecommerce\Entity\Endereco;
-use Ecommerce\Form\EnderecoForm;
+use Admin\Entity\Endereco;
+use Admin\Form\EnderecoForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Ecommerce\Validator\EnderecoValidator;
+use Admin\Validator\EnderecoValidator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
@@ -14,7 +14,7 @@ use Zend\Paginator\Paginator;
 /**
  * Controlador para cadastrar novos produtos
  *
- * @category Ecommerce
+ * @category Admin
  * @package Controller
  * @author  Maico
  */
@@ -26,7 +26,7 @@ class EnderecosController extends AbstractActionController {
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $select = $entityManager->createQueryBuilder()
                 ->select('Endereco')
-                ->from('Ecommerce\Entity\Endereco', 'Endereco')
+                ->from('Admin\Entity\Endereco', 'Endereco')
                 //->join('Produto.marca', 'Marca')
                 //->join('Produto.subcategoria', 'SubCategoria')
                 //->join('Produto.modelo', 'Modelo')
@@ -39,8 +39,6 @@ class EnderecosController extends AbstractActionController {
 
         if ($page > 0)
             $paginator->setCurrentPageNumber($page);
-
-        //var_dump($paginator);exit;
 
         return new ViewModel(
                 array('enderecos' => $paginator)
@@ -65,6 +63,7 @@ class EnderecosController extends AbstractActionController {
                 $endereco = new Endereco();
                 
                 $endereco->nome_do_destinatario = $values['nome_do_destinatario'];
+                $endereco->telefone = $values['telefone'];
                 $endereco->cep = $values['cep'];
                 $endereco->numero = $values['numero'];
                 $endereco->endereco = $values['endereco'];
@@ -73,23 +72,23 @@ class EnderecosController extends AbstractActionController {
                 $endereco->informacao_referencia = $values['informacao_referencia'];
                 $endereco->cidade = $values['cidade'];
                 $endereco->estado = $values['estado'];
-                $endereco->tipo_endereco = $em->find('\Ecommerce\Entity\TipoEndereco', $values['tipo_endereco']);
+                $endereco->tipo_endereco = $em->find('\Admin\Entity\TipoEndereco', $values['tipo_endereco']);
                 
-                var_dump($endereco);exit;
+                //var_dump($endereco);exit;
                 
 
-                $endereco->marca = $em->find('\Ecommerce\Entity\Marca', $values['marca']);
-                $endereco->nome = $values['nome'];
-                $endereco->descricao = $values['descricao'];
-                $endereco->valor = $values['valor'];
-                $endereco->margem_de_lucro = $values['margem_de_lucro'];
-                $endereco->modelo = $em->find('\Ecommerce\Entity\Modelo', $values['modelo']);
-                $endereco->subcategoria = $em->find('\Ecommerce\Entity\SubCategoria', $values['subcategoria']);
+                // $endereco->marca = $em->find('\Admin\Entity\Marca', $values['marca']);
+                // $endereco->nome = $values['nome'];
+                // $endereco->descricao = $values['descricao'];
+                // $endereco->valor = $values['valor'];
+                // $endereco->margem_de_lucro = $values['margem_de_lucro'];
+                // $endereco->modelo = $em->find('\Admin\Entity\Modelo', $values['modelo']);
+                // $endereco->subcategoria = $em->find('\Admin\Entity\SubCategoria', $values['subcategoria']);
 
-                foreach ($values['categorias'] as $categoria)
-                    $produto->categorias->add($em->find('\Ecommerce\Entity\Categoria', $categoria));
+                // foreach ($values['categorias'] as $categoria)
+                //     $produto->categorias->add($em->find('\Admin\Entity\Categoria', $categoria));
 
-                $em->persist($produto);
+                $em->persist($endereco);
 
                 //var_dump($em);exit;
                 // try {
@@ -97,7 +96,7 @@ class EnderecosController extends AbstractActionController {
                 //$this->flashMessenger()->addSuccessMessage('Produto inserido com sucesso');
                 //$this->view->resp = "Produto,  " . $produto->nome. ", enviado com sucesso!";
 
-                return $this->redirect()->toUrl('/ecommerce/produtos/index');
+                return $this->redirect()->toUrl('/admin/enderecos/index');
                 //} catch (\Exception $e) {
                 //   $this->flashMessenger()->addErrorMessage('Erro ao inserir produto');
                 //}
@@ -116,20 +115,20 @@ class EnderecosController extends AbstractActionController {
 
         if ($request->isPost()) {
             $values = $request->getPost();
-            $produto = $em->find('\Ecommerce\Entity\Produto', $id);
+            $produto = $em->find('\Admin\Entity\Produto', $id);
 
-            $produto->marca = $em->find('\Ecommerce\Entity\Marca', $values['marca']);
+            $produto->marca = $em->find('\Admin\Entity\Marca', $values['marca']);
             $produto->nome = $values['nome'];
             $produto->descricao = $values['descricao'];
             $produto->valor = $values['valor'];
             $produto->margem_de_lucro = $values['margem_de_lucro'];
-            $produto->modelo = $em->find('\Ecommerce\Entity\Modelo', $values['modelo']);
-            $produto->subcategoria = $em->find('\Ecommerce\Entity\SubCategoria', $values['subcategoria']);
+            $produto->modelo = $em->find('\Admin\Entity\Modelo', $values['modelo']);
+            $produto->subcategoria = $em->find('\Admin\Entity\SubCategoria', $values['subcategoria']);
 
             $produto->categorias->clear();
 
             foreach ($values['categorias'] as $categoria)
-                $produto->categorias->add($em->find('\Ecommerce\Entity\Categoria', $categoria));
+                $produto->categorias->add($em->find('\Admin\Entity\Categoria', $categoria));
 
             //$em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
             $em->persist($produto);
@@ -140,7 +139,7 @@ class EnderecosController extends AbstractActionController {
                 $this->flashMessenger()->addSuccessMessage('Produto editado com sucesso');
                 //$this->view->resp = "Produto,  " . $produto->nome. ", enviado com sucesso!";
 
-                return $this->redirect()->toUrl('/ecommerce/produtos/index');
+                return $this->redirect()->toUrl('/admin/produtos/index');
             } catch (\Exception $e) {
                 $this->flashMessenger()->addErrorMessage('Erro ao editar produto');
             }
@@ -150,7 +149,7 @@ class EnderecosController extends AbstractActionController {
 
         if ($id > 0) {
             $form = new ProdutoForm($em);
-            $produto = $em->find('\Ecommerce\Entity\Produto', $id);
+            $produto = $em->find('\Admin\Entity\Produto', $id);
             $form->bind($produto);
 
             return new ViewModel(array('form' => $form));
@@ -164,7 +163,7 @@ class EnderecosController extends AbstractActionController {
     public function deleteAction() {
         $id = $this->params()->fromRoute('id', 0);
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $produto = $entityManager->find('\Ecommerce\Entity\Produto', $id);
+        $produto = $entityManager->find('\Admin\Entity\Produto', $id);
         $entityManager->remove($produto);
 
         try {
@@ -172,7 +171,7 @@ class EnderecosController extends AbstractActionController {
             $this->flashMessenger()->addSuccessMessage('Produto excluido com sucesso');
             //$this->view->resp = "Produto,  " . $produto->nome. ", enviado com sucesso!";
 
-            return $this->redirect()->toUrl('/ecommerce/produtos/index');
+            return $this->redirect()->toUrl('/admin/produtos/index');
         } catch (\Exception $e) {
             $this->flashMessenger()->addErrorMessage('Erro ao excluir produto');
         }

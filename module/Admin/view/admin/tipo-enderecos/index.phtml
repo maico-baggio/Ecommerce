@@ -1,4 +1,4 @@
-<a href="/ecommerce/tipo-enderecos/create"><input type="button" class="btn btn-primary" value="Novo tipo endereço" title="Inserir novo tipo de endereço."></a>	
+<a href="/admin/tipo-enderecos/create"><input type="button" class="btn btn-primary" value="Novo tipo endereço" title="Inserir novo tipo de endereço."></a>	
 <br><br>
 
 <div class='panel panel-default'>
@@ -17,10 +17,10 @@
                     <td><?= $tipoEndereco->id_tipo_endereco; ?></td>
                     <td><?= $tipoEndereco->descricao; ?></td>
 
-                    <td> <a href="/ecommerce/tipo-enderecos/update/id/<?= $tipoEndereco->id_tipo_endereco ?>">
+                    <td> <a href="/admin/tipo-enderecos/update/id/<?= $tipoEndereco->id_tipo_endereco ?>">
                             <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
 
-                    <td> <a href="/ecommerce/tipo-enderecos/delete/id/<?= $tipoEndereco->id_tipo_endereco ?>">
+                    <td> <a href="/admin/tipo-enderecos/delete/id/<?= $tipoEndereco->id_tipo_endereco ?>">
                             <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
                 </tr>
             <?php } ?>

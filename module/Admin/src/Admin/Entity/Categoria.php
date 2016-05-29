@@ -1,27 +1,21 @@
 <?php
 
-namespace Ecommerce\Entity;
+namespace Admin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Model Categoria
- * @category Ecommerce
- * @package Entity
- * @author Maico Baggio <maico.baggio@unochapeco.edu.br>
- */
-
-/**
- * @ORM\Entity
- * @ORM\Table (name = "categoria")
- *
- * @author  Cezar Junior de Souza <cezar08@unochapeco.edu.br
  * @category Admin
  * @package Entity
+ * @author Maico <e-mail>
+ * 
+ * @ORM\Entity
+ * @ORM\Table (name = "categoria")
  */
-class Categoria
-{
+class Categoria {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -38,7 +32,6 @@ class Categoria
      */
     protected $descricao;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Produto", mappedBy="categoria")
      *
@@ -46,23 +39,20 @@ class Categoria
      */
     protected $produtos;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->produtos = new ArrayCollection();
     }
 
-    public function getArrayCopy()
-    {
+    public function getArrayCopy() {
         return get_object_vars($this);
     }
 
-    public function __set($name, $value)
-    {
-       $this->$name = $value;
+    public function __set($name, $value) {
+        $this->$name = $value;
     }
 
-    public function __get($name)
-    {
-       return $this->$name;
+    public function __get($name) {
+        return $this->$name;
     }
+
 }
