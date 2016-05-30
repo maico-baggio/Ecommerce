@@ -61,18 +61,18 @@ return array(
 
         ),
     ),
-    'doctrine' => array(
-        'driver' => array(
-            'application_entities' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
-                'paths' => array(__DIR__ . '/../src/Ecommerce/Entity')
-            ),
-            'orm_default' => array(
-                'drivers' => array(
-                    'Ecommerce\Entity' => 'application_entities'
-                )
-            ))),
+    // 'doctrine' => array(
+    //     'driver' => array(
+    //         'application_entities' => array(
+    //             'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+    //             'cache' => 'array',
+    //             'paths' => array(__DIR__ . '/../src/Ecommerce/Entity')
+    //         ),
+    //         'orm_default' => array(
+    //             'drivers' => array(
+    //                 'Ecommerce\Entity' => 'application_entities'
+    //             )
+    //         ))),
     'service_manager' => array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
