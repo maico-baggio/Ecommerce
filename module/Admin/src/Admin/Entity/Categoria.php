@@ -1,5 +1,4 @@
 <?php
-
 namespace Admin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -7,15 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Model Categoria
+ *
  * @category Admin
- * @package Entity
- * @author Maico <e-mail>
+ * @package  Entity
+ * @author   Maico <e-mail@email.com>
  * 
  * @ORM\Entity
- * @ORM\Table (name = "categoria")
+ * @ORM\Table  (name = "categoria")
  */
-class Categoria {
-
+class Categoria
+{
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -39,20 +39,23 @@ class Categoria {
      */
     protected $produtos;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->produtos = new ArrayCollection();
     }
 
-    public function getArrayCopy() {
+    public function getArrayCopy()
+    {
         return get_object_vars($this);
     }
 
-    public function __set($name, $value) {
+    public function __set($name, $value)
+    {
         $this->$name = $value;
     }
 
-    public function __get($name) {
+    public function __get($name)
+    {
         return $this->$name;
     }
-
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Admin\Controller;
 
 use Admin\Entity\SubCategoria;
@@ -25,11 +24,12 @@ class SubCategoriasController extends AbstractActionController
     {
         $page = (int) $_GET['page'];
 
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $entityManager = $this->getServiceLocator()
+            ->get('Doctrine\ORM\EntityManager');
         $select = $entityManager->createQueryBuilder()
-                ->select('SubCategoria')
-                ->from('Admin\Entity\SubCategoria', 'SubCategoria')
-                ->orderBy('SubCategoria.descricao', 'ASC');
+            ->select('SubCategoria')
+            ->from('Admin\Entity\SubCategoria', 'SubCategoria')
+            ->orderBy('SubCategoria.descricao', 'ASC');
 
         $adapter = new DoctrineAdapter(new ORMPaginator($select));
         $paginator = new Paginator($adapter);
@@ -40,7 +40,10 @@ class SubCategoriasController extends AbstractActionController
         }
 
         return new ViewModel(
-                array('subCategorias' => $paginator)
+            array
+            (
+                'subCategorias' => $paginator
+            )
         );
     }
 
@@ -67,16 +70,16 @@ class SubCategoriasController extends AbstractActionController
                 $values = $form->getData();
 
                 if ($id) {
-                    $tipoEndereco = $entityManager
+                    $subCategoria = $entityManager
                         ->find('Admin\Entity\SubCategoria', $id);
                 } else {
-                    $tipoEndereco = new SubCategoria();
+                    $subCategoria = new SubCategoria();
                 }
-                $tipoEndereco->descricao = $values['descricao'];
+                $subCategoria->descricao = $values['descricao'];
                 
                 $entityManager = $this->getServiceLocator()
                     ->get('Doctrine\ORM\EntityManager');
-                $entityManager->persist($tipoEndereco);
+                $entityManager->persist($subCategoria);
                 
                 try {
                     $entityManager->flush();
@@ -93,8 +96,10 @@ class SubCategoriasController extends AbstractActionController
         if ($id > 0) {
             try {
                 $form = new SubCategoriaForm();
-                $tipoEndereco = $entityManager->find('Admin\Entity\SubCategoria', $id);
-                $form->bind($tipoEndereco);
+                $subCategoria = $entityManager
+                    ->find('Admin\Entity\SubCategoria', $id);
+
+                $form->bind($subCategoria);
             } catch (\Exception $e) {
                 $this->flashMessenger()
                     ->addErrorMessage('Erro ao tentar editar a subcategoria');
@@ -113,7 +118,8 @@ class SubCategoriasController extends AbstractActionController
     public function deleteAction()
     {
         $id = $this->params()->fromRoute('id', 0);
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $entityManager = $this->getServiceLocator()
+            ->get('Doctrine\ORM\EntityManager');
         $subCategoria = $entityManager->find('\Admin\Entity\SubCategoria', $id);
         $entityManager->remove($subCategoria);
         try {

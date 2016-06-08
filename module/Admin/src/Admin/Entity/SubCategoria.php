@@ -1,5 +1,4 @@
 <?php
-
 namespace Admin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -7,13 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Entity SubCategoria
+ *
  * @category Admin
- * @package Entity
- * @author Maico <email@email.com>
+ * @package  Entity
+ * @author   Maico <email@email.com>
  *
  * @ORM\Entity
- * @ORM\Table (name = "sub_categoria")
- *
+ * @ORM\Table  (name = "sub_categoria")
  */
 class SubCategoria
 {

@@ -1,49 +1,56 @@
 <?php
-
 namespace Admin\Form;
 
 use Zend\Form\Form;
 
 /**
- * Form para cadastrar sub categoria
+ * Form para cadastrar subcategoria
+ *
  * @category Admin
- * @package form
- * @author Maico Baggio <maico.baggio@unochapeco.edu.br>
+ * @package  Form
+ * @author   Maico <email@email.com>
  */
-class SubCategoriaForm extends Form {
-
-    public function __construct() {
+class SubCategoriaForm extends Form
+{
+    /**
+    * Form para cadastrar subcategoria
+    */
+    public function __construct()
+    {
         parent::__construct('SubCategoriaForm');
         $this->setAttribute('method', 'POST');
+        
         $this->add(
-                array(
-                    'name' => 'id',
-                    'type' => 'hidden'
-                )
-        );
-        $this->add(
-                array(
-                    'name' => 'descricao',
-                    'type' => 'text',
-                    'options' => array(
-                        'label' => 'Descrição da sub categoria*:'
-                    ),
-                    'attributes' => array(
-                        'placeholder' => 'Informe uma sub categoria',
-                        'class' => 'form-control',
-                        'size' => '30'
-                    ),
-                )
-        );
-        $this->add(array(
-            'name' => 'salvar',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Salvar',
-                'class' => 'btn btn-primary',
-                'title' => 'Salvar'
+            array(
+                'name' => 'id',
+                'type' => 'hidden'
             )
-        ));
+        );
+        $this->add(
+            array(
+                'name' => 'descricao',
+                'type' => 'text',
+                'options' => array(
+                    'label' => 'Descrição da sub categoria*:'
+                ),
+                'attributes' => array(
+                    'placeholder' => 'Informe uma sub categoria',
+                    'class' => 'form-control',
+                    'size' => '30'
+                ),
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'salvar',
+                'type' => 'submit',
+                'attributes' => array(
+                    'value' => 'Salvar',
+                    'class' => 'btn btn-primary',
+                    'title' => 'Salvar'
+                )
+            )
+        );
  
         $this->add(
             array(

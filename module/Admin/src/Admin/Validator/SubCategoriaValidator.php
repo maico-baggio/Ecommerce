@@ -5,18 +5,29 @@ namespace Admin\Validator;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
 
-class SubCategoriaValidator extends InputFilter {
+class SubCategoriaValidator extends InputFilter
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $factory = new InputFactory();
-        $this->add($factory->createInput(array(
+        
+        $this->add(
+            $factory->createInput(
+                array(
                     'name' => 'id',
                     'required' => false,
                     'filters' => array(
-                        array('name' => 'Int'),
+                        array(
+                            'name' => 'Int'
+                        ),
                     ),
-        )));
-        $this->add($factory->createInput(array(
+                )
+            )
+        );
+        $this->add(
+            $factory->createInput(
+                array(
                     'name' => 'descricao',
                     'required' => true,
                     'filters' => array(
@@ -38,7 +49,8 @@ class SubCategoriaValidator extends InputFilter {
                         array(
                             'name' => 'NotEmpty',
                         )),
-        )));
+                )
+            )
+        );
     }
-
 }

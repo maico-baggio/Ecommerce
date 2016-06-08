@@ -1,37 +1,42 @@
-<a href="/admin/categorias/create"><input type="button" class="btn btn-primary" value="Nova categoria" title="Inserir nova categoria."></a>	
+<h1>Categoria</h1>
+<a href="/admin/categorias/save"><input type="button" 
+   class="btn btn-primary" value="Nova categoria" 
+   title="Inserir nova categoria."></a>	
 <br><br>
 <div class='panel panel-default'>
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
+            <tr class="tabela">
                 <th>Descrição</th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($categorias as $categoria) {
-                ?>
+            ?>
                 <tr>
-                    <td><?= $categoria->id_categoria; ?></td>
                     <td><?= $categoria->descricao; ?></td>
-                    <td> <a href="/admin/categorias/update/id/<?= $categoria->id_categoria ?>">
-                        <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
+                    <td> 
+                        <a href="/admin/categorias/save/id/<?= $categoria->id_categoria ?>">
+                        <span class="glyphicon glyphicon-pencil" 
+                        title="Editar registro"></span> </a>
 
-                        <td> <a href="/admin/categorias/delete/id/<?= $categoria->id_categoria ?>">
-                            <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
-
-                        </tr>
-
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <?php
-            echo $this->paginationControl(
-                $categorias, 'sliding', 'partial/paginator.phtml', array(
-                    'route' => 'categorias'
-                    )
-                );
-                ?>
+                        <a href="/admin/categorias/delete/id/<?php echo 
+                        $categoria->id_categoria ?>"
+                        onclick= "return confirm('Deseja excluir este registro?');">
+                        <span class="glyphicon glyphicon-trash" 
+                        title="Editar registro"></span> </a>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+<?php
+    echo $this->paginationControl(
+        $categorias, 'sliding', 'partial/paginator.phtml', 
+        array(
+            'route' => 'categorias'
+        )
+    );
+?>
