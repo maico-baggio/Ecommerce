@@ -29,18 +29,37 @@ class SubCategoriaForm extends Form {
                         'label' => 'Descrição da sub categoria*:'
                     ),
                     'attributes' => array(
-                        'placeholder' => 'Informe uma sub categoria'
+                        'placeholder' => 'Informe uma sub categoria',
+                        'class' => 'form-control',
+                        'size' => '30'
                     ),
                 )
         );
         $this->add(array(
-            'name' => 'Salvar',
+            'name' => 'salvar',
             'type' => 'submit',
             'attributes' => array(
                 'value' => 'Salvar',
-                'class' => 'btn btn-primary'
+                'class' => 'btn btn-primary',
+                'title' => 'Salvar'
             )
         ));
+ 
+        $this->add(
+            array(
+                'type' => 'button',
+                'name' => 'cancelar',
+                'attributes' => array(
+                    'value' => 'Cancelar',
+                    'class' => 'btn',
+                    'onclick' => "location.href='/admin/subcategorias/index'",
+                    'title' => 'Cancelar'
+                ),
+                'options' => array(
+                    'label' => 'Cancelar'
+                )
+            )
+        );
     }
 
 }

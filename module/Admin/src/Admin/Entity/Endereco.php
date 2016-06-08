@@ -87,7 +87,7 @@ class Endereco {
      */
     protected $cidade;
 
-        /**
+    /**
      * @ORM\Column(type="string")
      *
      * @var string $telefone

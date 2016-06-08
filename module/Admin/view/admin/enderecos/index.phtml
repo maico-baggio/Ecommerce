@@ -6,6 +6,7 @@
         <thead>
             <tr>
                 <th>Nome do destinatário</th>
+                <th>Telefone</th>
                 <th>Tipo Endereco</th>
                 <th>CEP</th>
                 <th>Endereco</th>
@@ -24,6 +25,7 @@
                 <tr>
 
                     <td><?= $endereco->nome_do_destinatario; ?></td>
+                    <td><?= $endereco->telefone; ?></td>
                     <td><?= $endereco->tipo_endereco->descricao; ?></td>
                     <td><?= $endereco->cep; ?></td>
                     <td><?= $endereco->endereco; ?></td>
@@ -34,10 +36,11 @@
                     <td><?= $endereco->cidade; ?></td>
                     <td><?= $endereco->estado; ?></td>
 
-                    <td> <a href="/admin/produtos/update/id/<?= $endereco->id_endereco ?>">
+                    <td> <a href="/admin/enderecos/update/id/<?= $endereco->id_endereco ?>">
                             <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
 
-                    <td> <a href="/admin/produtos/delete/id/<?= $endereco->id_endereco ?>">
+                    <td> <a href="/admin/enderecos/delete/id/<?= $endereco->id_endereco ?>"
+                            onclick= "return confirm('Tem certeza que deseja excluir este registro?');">
                             <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
                 </tr>
             <?php } ?>
@@ -51,4 +54,3 @@ echo $this->paginationControl(
         )
 );
 ?>
-

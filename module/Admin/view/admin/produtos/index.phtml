@@ -6,7 +6,6 @@
         <thead>
             <tr>
                 <th>Foto</th>
-                <th>Id</th>
                 <th>Nome</th>
                 <th>Descrição</th>
                 <th>Marca</th>
@@ -23,9 +22,8 @@
                 ?>
                 <tr>
                     <td>
-                    <img class="img"  src="/img/photos_produtos/thumb/<?= $produto->url_photo  ?>" />
-                </td>
-                    <td><?= $produto->id_produto; ?></td>
+                        <img class="img"  src="/img/photos_produtos/thumb/<?= $produto->url_photo  ?>" />
+                    </td>
                     <td><?= $produto->nome; ?></td>
                     <td><?= $produto->descricao; ?></td>
                     <td><?= $produto->marca->descricao; ?></td>
@@ -36,19 +34,21 @@
                     <td><?= $produto->margem_de_lucro; ?></td>
 
                     <td> <a href="/admin/produtos/update/id/<?= $produto->id_produto ?>">
-                            <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
+                        <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
 
-                    <td> <a href="/admin/produtos/delete/id/<?= $produto->id_produto ?>">
+                        <td> <a href="/admin/produtos/delete/id/<?= $produto->id_produto ?>">
                             <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
-<?php
-echo $this->paginationControl(
-        $produtos, 'sliding', 'partial/paginator.phtml', array(
-    'route' => 'produtos'
-        )
-);
-?>
+                            <td> <a href="/admin/produtos/visualizar/id/<?= $produto->id_produto ?>">
+                                <span class="glyphicon glyphicon-eye-open" title="vizualizar registro"></span> </a></td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                <?php
+                echo $this->paginationControl(
+                    $produtos, 'sliding', 'partial/paginator.phtml', array(
+                        'route' => 'produtos'
+                        )
+                    );
+                    ?>

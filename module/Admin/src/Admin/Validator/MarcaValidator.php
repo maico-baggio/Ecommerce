@@ -1,22 +1,34 @@
 <?php
-
 namespace Admin\Validator;
 
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
 
-class MarcaValidator extends InputFilter {
+/**
+ * @category Admin
+ * @package  Validator
+ * @author   Maico <e-mail@mail.com>
+ */
 
-    public function __construct() {
+class MarcaValidator extends InputFilter
+{
+    public function __construct()
+    {
         $factory = new InputFactory();
-        $this->add($factory->createInput(array(
+        $this->add(
+            $factory->createInput(
+                array(
                     'name' => 'id',
                     'required' => false,
                     'filters' => array(
                         array('name' => 'Int'),
                     ),
-        )));
-        $this->add($factory->createInput(array(
+                )
+            )
+        );
+        $this->add(
+            $factory->createInput(
+                array(
                     'name' => 'descricao',
                     'required' => true,
                     'filters' => array(
@@ -37,8 +49,10 @@ class MarcaValidator extends InputFilter {
                         ),
                         array(
                             'name' => 'NotEmpty',
-                        )),
-        )));
+                        )
+                    ),
+                )
+            )
+        );
     }
-
 }

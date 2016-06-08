@@ -1,11 +1,13 @@
-<a href="/admin/sub-categorias/create"><input type="button" class="btn btn-primary" value="Nova subcategoria" title="Inserir uma nova subcategoria."></a>	
+<h1>Subcategoria</h1>
+<a href="/admin/subcategorias/save"><input type="button" 
+   class="btn btn-primary" value="Nova subcategoria" 
+   title="Inserir uma nova subcategoria."></a>	
 <br><br>
 
 <div class='panel panel-default'>
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
+            <tr class="tabela">
                 <th>Descrição</th>
             </tr>
         </thead>
@@ -14,14 +16,19 @@
             foreach ($subCategorias as $subCategoria) {
                 ?>
                 <tr>
-                    <td><?= $subCategoria->id_sub_categoria; ?></td>
-                    <td><?= $subCategoria->descricao; ?></td>
+                    <td><?php echo $subCategoria->descricao; ?></td>
 
-                    <td> <a href="/admin/sub-categorias/update/id/<?= $subCategoria->id_sub_categoria ?>">
-                            <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
+                    <td> 
+                        <a href="/admin/subcategorias/save/id/<?= $subCategoria->id_sub_categoria ?>">
+                        <span class="glyphicon glyphicon-pencil" 
+                        title="Editar registro"></span> </a>
 
-                    <td> <a href="/admin/sub-categorias/delete/id/<?= $subCategoria->id_sub_categoria ?>">
-                            <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
+                        <a href="/admin/subcategorias/delete/id/
+                        <?= $subCategoria->id_sub_categoria ?>"
+                        onclick= "return confirm('Deseja excluir este registro?');">
+                        <span class="glyphicon glyphicon-trash" 
+                        title="Excluir registro"></span> </a>
+                    </td>
                 </tr>
             <?php } ?>
         </tbody>
@@ -30,8 +37,9 @@
 
 <?php
 echo $this->paginationControl(
-        $subCategorias, 'sliding', 'partial/paginator.phtml', array(
-    'route' => 'subCategoria'
-        )
+    $subCategorias, 'sliding', 'partial/paginator.phtml', 
+    array(
+        'route' => 'subCategoria'
+    )
 );
 ?>

@@ -9,16 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  * Entity SubCategoria
  * @category Admin
  * @package Entity
- * @author Maico Baggio <maico.baggio@unochapeco.edu.br>
- */
-
-/**
+ * @author Maico <email@email.com>
+ *
  * @ORM\Entity
  * @ORM\Table (name = "sub_categoria")
  *
- * @author  Maico.baggio <maico.baggio@unochapeco.edu.br
- * @category Admin
- * @package Entity
  */
 class SubCategoria
 {

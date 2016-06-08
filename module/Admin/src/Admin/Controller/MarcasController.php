@@ -15,34 +15,50 @@ use Zend\Paginator\Paginator;
  * Controlador para cadastrar novas marcas.
  *
  * @category Admin
- * @package Controller
- * @author  Maico <e-mail>
+ * @package  Controller
+ * @author   Maico <e-mail@email.com>
  */
-class MarcasController extends AbstractActionController {
 
-    public function indexAction() {
+class MarcasController extends AbstractActionController
+{
+    /**
+    *
+    * Lista as marcas cadastradas
+    * @return void
+    */
+    public function indexAction() 
+    {
         $page = (int) $_GET['page'];
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $entityManager = $this->getServiceLocator()
+            ->get('Doctrine\ORM\EntityManager');
         $select = $entityManager->createQueryBuilder()
-                ->select('Marca')
-                ->from('Admin\Entity\Marca', 'Marca')
-                ->orderBy('Marca.descricao', 'ASC');
+            ->select('Marca')
+            ->from('Admin\Entity\Marca', 'Marca')
+            ->orderBy('Marca.descricao', 'ASC');
 
         $adapter = new DoctrineAdapter(new ORMPaginator($select));
         $paginator = new Paginator($adapter);
         $paginator->setDefaultItemCountPerPage(ItensPerPage);
 
-        if ($page > 0)
+        if ($page > 0 ) {
             $paginator->setCurrentPageNumber($page);
+        }
 
         return new ViewModel(
-                array('marcas' => $paginator)
+            array
+            (
+                'marcas' => $paginator
+            )
         );
     }
-
-    public function saveAction() {
-
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+    /**
+    * Cria e edita as marcas cadastradas
+    * @return void
+    */
+    public function saveAction() 
+    {
+        $entityManager = $this->getServiceLocator()
+            ->get('Doctrine\ORM\EntityManager');
         //$session = $this->getService('Session');
 
         $id = (int) $this->params()->fromRoute('id', 0);
@@ -68,14 +84,17 @@ class MarcasController extends AbstractActionController {
                 }
 
                 $marca->descricao = $values['descricao'];
-                $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+                $entityManager = $this->getServiceLocator()
+                    ->get('Doctrine\ORM\EntityManager');
                 $entityManager->persist($marca);
                 try {
                     $entityManager->flush();
-                    $this->flashMessenger()->addSuccessMessage('Marca cadastrada com sucesso.');
+                    $this->flashMessenger()
+                        ->addSuccessMessage('Marca cadastrada com sucesso.');
                     return $this->redirect()->toUrl('/admin/marcas/index');
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage('Erro ao cadastrar marca.');
+                    $this->flashMessenger()
+                        ->addErrorMessage('Erro ao cadastrar marca.');
                 }
             }
         }
@@ -86,90 +105,41 @@ class MarcasController extends AbstractActionController {
                 $marca = $entityManager->find('Admin\Entity\Marca', $id);
                 $form->bind($marca);
             } catch (\Exception $e) {
-                $this->flashMessenger()->addErrorMessage('Erro ao tentar editar a marca');
+                $this->flashMessenger()
+                    ->addErrorMessage('Erro ao tentar editar a marca');
                 $this->redirect()->toUrl('/admin/marcas/index');
             }
         }
 
-        return new ViewModel(array(
-            'form' => $form
-        ));
-
-//-------------------------------------
-//        $form = new MarcaForm();
-//        $request = $this->getRequest();
-//
-//        if ($request->isPost()) {
-//            $validator = new MarcaValidator();
-//            $form->setInputFilter($validator);
-//            $values = $request->getPost();
-//            $form->setData($values);
-//
-//            if ($form->isValid()) {
-//                $values = $form->getData();
-//                $marca = new Marca();
-//                $marca->descricao = $values['descricao'];
-//                $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-//                $entityManager->persist($marca);
-//
-//                try {
-//                    $entityManager->flush();
-//                    $this->flashMessenger()->addSuccessMessage('Marca cadastrada com sucesso.');
-//                    return $this->redirect()->toUrl('/admin/marcas/index');
-//                } catch (\Exception $e) {
-//                    $this->flashMessenger()->addErrorMessage('Erro ao cadastrar marca.');
-//                }
-//
-//                //return $this->redirect()->toUrl('/Admin/marcas');
-//            }
-//        }
-//        return new ViewModel(array(
-//            'form' => $form
-//        ));
+        return new ViewModel(
+            array
+            (
+                'form' => $form
+            )
+        );
     }
 
-//    public function updateAction() {
-//        $id = $this->params()->fromRoute('id', 0);
-//        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-//        $request = $this->getRequest();
-//
-//        if ($request->isPost()) {
-//            $values = $request->getPost();
-//            $marca = $entityManager->find('\Admin\Entity\Marca', $id);
-//            $marca->descricao = $values['descricao'];
-//            $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-//            $entityManager->persist($marca);
-//            $entityManager->flush();
-//
-//            return $this->redirect()->toUrl('/Admin/marcas');
-//        }
-//
-//        if ($id > 0) {
-//            $form = new MarcaForm();
-//            $marca = $entityManager->find('\Admin\Entity\Marca', $id);
-//            $form->bind($marca);
-//
-//            return new ViewModel(array('form' => $form));
-//        }
-//
-//        $this->request->setStatusCode(404);
-//        return $this->request;
-//    }
-
-    public function deleteAction() {
+    /**
+    * Deleta as marcas cadastradas
+    * @return void
+    */
+    public function deleteAction() 
+    {
         $id = $this->params()->fromRoute('id', 0);
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $entityManager = $this->getServiceLocator()
+            ->get('Doctrine\ORM\EntityManager');
         $marca = $entityManager->find('\Admin\Entity\Marca', $id);
         $entityManager->remove($marca);
 
         try {
             $entityManager->flush();
-            $this->flashMessenger()->addSuccessMessage('Marca excluída com sucesso.');
+            $this->flashMessenger()
+                ->addSuccessMessage('Marca excluída com sucesso.');
             return $this->redirect()->toUrl('/admin/marcas/index');
         } catch (\Exception $e) {
-            $this->flashMessenger()->addErrorMessage('Erro ao excluir marca, verifique os vinculos ou contate o administrador.');
+            $msg = 'Erro ao excluir marca, tente novamente mais tarde ';
+            $this->flashMessenger()->addErrorMessage($msg);
             return $this->redirect()->toUrl('/admin/marcas/index');
         }
     }
-
 }

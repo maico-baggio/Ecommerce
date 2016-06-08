@@ -6,14 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
- * @ORM\Table (name = "tipo_endereco")
+ * Entity Tipo de endereco
  *
- * @author  Maico.baggio <maico.baggio@unochapeco.edu.br
+ * @ORM\Entity
+ * @ORM\Table  (name = "tipo_endereco")
+ *
  * @category Admin
- * @package Entity
+ * @package  Entity
+ * @author   Maico <email@email.com>
  */
-class TipoEndereco {
+class TipoEndereco
+{
 
     /**
      * @ORM\Id
@@ -38,20 +41,23 @@ class TipoEndereco {
      */
     protected $enderecos;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->enderecos = new ArrayCollection();
     }
 
-    public function getArrayCopy() {
+    public function getArrayCopy()
+    {
         return get_object_vars($this);
     }
 
-    public function __set($name, $value) {
+    public function __set($name, $value)
+    {
         $this->$name = $value;
     }
 
-    public function __get($name) {
+    public function __get($name)
+    {
         return $this->$name;
     }
-
 }

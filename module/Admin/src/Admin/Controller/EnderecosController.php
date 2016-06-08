@@ -12,7 +12,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
 
 /**
- * Controlador para cadastrar novos produtos
+ * Controlador para cadastrar novos endereços
  *
  * @category Admin
  * @package Controller
@@ -51,7 +51,7 @@ class EnderecosController extends AbstractActionController {
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            
+
             $validator = new EnderecoValidator();
             $form->setInputFilter($validator);
             $values = $request->getPost();
@@ -61,7 +61,7 @@ class EnderecosController extends AbstractActionController {
                 $values = $form->getData();
 
                 $endereco = new Endereco();
-                
+
                 $endereco->nome_do_destinatario = $values['nome_do_destinatario'];
                 $endereco->telefone = $values['telefone'];
                 $endereco->cep = $values['cep'];
@@ -73,33 +73,18 @@ class EnderecosController extends AbstractActionController {
                 $endereco->cidade = $values['cidade'];
                 $endereco->estado = $values['estado'];
                 $endereco->tipo_endereco = $em->find('\Admin\Entity\TipoEndereco', $values['tipo_endereco']);
-                
-                //var_dump($endereco);exit;
-                
-
-                // $endereco->marca = $em->find('\Admin\Entity\Marca', $values['marca']);
-                // $endereco->nome = $values['nome'];
-                // $endereco->descricao = $values['descricao'];
-                // $endereco->valor = $values['valor'];
-                // $endereco->margem_de_lucro = $values['margem_de_lucro'];
-                // $endereco->modelo = $em->find('\Admin\Entity\Modelo', $values['modelo']);
-                // $endereco->subcategoria = $em->find('\Admin\Entity\SubCategoria', $values['subcategoria']);
-
-                // foreach ($values['categorias'] as $categoria)
-                //     $produto->categorias->add($em->find('\Admin\Entity\Categoria', $categoria));
 
                 $em->persist($endereco);
 
-                //var_dump($em);exit;
-                // try {
-                $em->flush();
-                //$this->flashMessenger()->addSuccessMessage('Produto inserido com sucesso');
-                //$this->view->resp = "Produto,  " . $produto->nome. ", enviado com sucesso!";
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Endereço inserido com sucesso');
+                    $this->view->resp = "Produto,  " . $endereco->nome_do_destinatario . ", enviado com sucesso!";
 
-                return $this->redirect()->toUrl('/admin/enderecos/index');
-                //} catch (\Exception $e) {
-                //   $this->flashMessenger()->addErrorMessage('Erro ao inserir produto');
-                //}
+                    return $this->redirect()->toUrl('/admin/enderecos/index');
+                } catch (\Exception $e) {
+                    $this->flashMessenger()->addErrorMessage('Erro ao inserir endereço');
+                }
             }
         }
 
@@ -163,30 +148,33 @@ class EnderecosController extends AbstractActionController {
     public function deleteAction() {
         $id = $this->params()->fromRoute('id', 0);
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $produto = $entityManager->find('\Admin\Entity\Produto', $id);
-        $entityManager->remove($produto);
+        $endereco = $entityManager->find('\Admin\Entity\Endereco', $id);
+        $entityManager->remove($endereco);
 
         try {
             $entityManager->flush();
-            $this->flashMessenger()->addSuccessMessage('Produto excluido com sucesso');
-            //$this->view->resp = "Produto,  " . $produto->nome. ", enviado com sucesso!";
-
-            return $this->redirect()->toUrl('/admin/produtos/index');
+            $this->flashMessenger()->addSuccessMessage('Endereço excluido com sucesso');
+            return $this->redirect()->toUrl('/admin/enderecos/index');
         } catch (\Exception $e) {
-            $this->flashMessenger()->addErrorMessage('Erro ao excluir produto');
+            $this->flashMessenger()->addErrorMessage('Erro ao excluir endereço');
         }
     }
 
-    public function thumb_photo($file, $file_name) {
-        header('Content-type: image/jpeg');
-        list($width, $height) = getimagesize($file);
-        $new_width = 120;
-        $new_height = 100;
-        $image_p = imagecreatetruecolor($new_width, $new_height);
-        $image = imagecreatefromjpeg($file);
-        imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-        imagejpeg($image_p, getcwd() . '/public/img/photos_produtos/thumb/' . $file_name, 50);
-        imagedestroy($image_p);
+    public function dataAction() {
+        
+        //$cep = $this->params()->fromRoute('id', 0);
+        $cep = $this->params()->fromRoute('cep', 0);
+        // Possíveis formatos (json, xml, query, object, array)
+        // null = \InfanaticaCepModule\Response\EnderecoResponse
+        $formato = 'json';
+        $serviceLocator = $this->getServiceLocator();
+        $cepService = $serviceLocator->get('InfanaticaCepModule\Service\CepService');
+        $endereco = $cepService->getEnderecoByCep($cep, $formato);
+
+        $this->response->setContent($endereco);
+        //var_dump();exit;
+
+        return $this->response;
     }
 
 }

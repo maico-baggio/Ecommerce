@@ -5,18 +5,28 @@ namespace Admin\Validator;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
 
-class TipoEnderecoValidator extends InputFilter {
-
-    public function __construct() {
+class TipoEnderecoValidator extends InputFilter
+{
+    /**
+    *Validator Tipo Endereco
+    */
+    public function __construct()
+    {
         $factory = new InputFactory();
-        $this->add($factory->createInput(array(
+        $this->add(
+            $factory->createInput(
+                array(
                     'name' => 'id',
-                    'required' => false,
+                    'required' => true,
                     'filters' => array(
                         array('name' => 'Int'),
                     ),
-        )));
-        $this->add($factory->createInput(array(
+                )
+            )
+        );
+        $this->add(
+            $factory->createInput(
+                array(
                     'name' => 'descricao',
                     'required' => true,
                     'filters' => array(
@@ -38,7 +48,8 @@ class TipoEnderecoValidator extends InputFilter {
                         array(
                             'name' => 'NotEmpty',
                         )),
-        )));
+                )
+            )
+        );
     }
-
 }

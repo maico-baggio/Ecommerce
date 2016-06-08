@@ -1,5 +1,33 @@
 <?php
+$form->prepare();
+
 echo $this->form()->openTag($form);
 echo $this->formCollection($form);
 echo $this->form()->closeTag();
 ?>
+
+
+<script>
+    /*   var d = {logradouro: "Rua Alfredo Wagner", bairro: "Alvorada", localidade: "Chapecó", uf: "SC"};
+     console.log(d.logradouro);    
+     $("input[name='endereco']").val(d.logradouro);
+     */
+    function buscaCEP()
+    {
+        var cep = $("input[name='cep']").val();
+
+        $.get("/admin/enderecos/data/cep/" + cep, function (result) {
+
+            var d = JSON.parse(result);
+
+            //$('#endereco').val(d.logradouro);//id do campo
+
+            $("input[name='endereco']").val(d.logradouro);
+            $("input[name='bairro']").val(d.bairro);
+            $("input[name='cidade']").val(d.localidade);
+            $("input[name='estado']").val(d.uf);
+
+        });
+
+    }
+</script>

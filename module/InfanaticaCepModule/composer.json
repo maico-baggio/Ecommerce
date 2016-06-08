@@ -1,0 +1,33 @@
+{
+  "name": "infanatica/infanatica-cep-module",
+  "description": "Modulo em Zend Framework 2 para consulta de endereco via CEP",
+  "tyoe": "library",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "cep",
+    "correios",
+    "endereco",
+    "modulo",
+    "zf2",
+    "zend",
+    "framework"
+  ],
+  "homepage": "https://github.com/Infanatica/InfanaticaCepModule",
+  "authors": [
+    {
+      "name":"Diogo Oliveira Mascarenhas"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "zendframework/zendframework": "~2.5"
+  },
+  "autoload": {
+    "psr-0": {
+      "InfanaticaCepModule": "src/"
+    },
+    "classmap": [
+      "./Module.php"
+    ]
+  }
+}

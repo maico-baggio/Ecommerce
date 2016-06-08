@@ -13,6 +13,7 @@ return array(
 	    'Admin',
             'Ecommerce',
 	    'DoctrineModule',
+	    'InfanaticaCepModule',
         'DoctrineORMModule',
     ),
 

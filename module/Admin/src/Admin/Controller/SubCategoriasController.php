@@ -15,12 +15,14 @@ use Zend\Paginator\Paginator;
  * Controlador para cadastrar novas marcas.
  *
  * @category Admin
- * @package Controller
- * @author  Maico Baggio <maico.baggio@unochapeco.edu.br>
+ * @package  Controller
+ * @author   Maico <email@email.com>
  */
-class SubCategoriasController extends AbstractActionController {
+class SubCategoriasController extends AbstractActionController
+{
 
-    public function indexAction() {
+    public function indexAction()
+    {
         $page = (int) $_GET['page'];
 
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
@@ -42,68 +44,87 @@ class SubCategoriasController extends AbstractActionController {
         );
     }
 
-    public function createAction() {
+    public function saveAction() 
+    {
+        $entityManager = $this->getServiceLocator()
+            ->get('Doctrine\ORM\EntityManager');
+        //$session = $this->getService('Session');
+
+        $id = (int) $this->params()->fromRoute('id', 0);
+
         $form = new SubCategoriaForm();
         $request = $this->getRequest();
 
         if ($request->isPost()) {
+
             $validator = new SubCategoriaValidator();
             $form->setInputFilter($validator);
             $values = $request->getPost();
             $form->setData($values);
 
             if ($form->isValid()) {
-                $values = $form->getData();
-                $subCategoria = new SubCategoria();
-                $subCategoria->descricao = $values['descricao'];
-                $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-                $entityManager->persist($subCategoria);
-                $entityManager->flush();
 
-                return $this->redirect()->toUrl('/admin/sub-categorias');
+                $values = $form->getData();
+
+                if ($id) {
+                    $tipoEndereco = $entityManager
+                        ->find('Admin\Entity\SubCategoria', $id);
+                } else {
+                    $tipoEndereco = new SubCategoria();
+                }
+                $tipoEndereco->descricao = $values['descricao'];
+                
+                $entityManager = $this->getServiceLocator()
+                    ->get('Doctrine\ORM\EntityManager');
+                $entityManager->persist($tipoEndereco);
+                
+                try {
+                    $entityManager->flush();
+                    $this->flashMessenger()
+                        ->addSuccessMessage('Subcategoria cadastrada com sucesso.');
+                    return $this->redirect()->toUrl('/admin/subcategorias/index');
+                } catch (\Exception $e) {
+                    $this->flashMessenger()
+                        ->addErrorMessage('Erro ao cadastrar uma subcategoria.');
+                }
             }
         }
 
-        return new ViewModel(array(
-            'form' => $form
-        ));
-    }
-
-    public function updateAction() {
-        $id = $this->params()->fromRoute('id', 0);
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $request = $this->getRequest();
-
-        if ($request->isPost()) {
-            $values = $request->getPost();
-            $subCategoria = $entityManager->find('\Admin\Entity\SubCategoria', $id);
-            $subCategoria->descricao = $values['descricao'];
-            $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-            $entityManager->persist($subCategoria);
-            $entityManager->flush();
-
-            return $this->redirect()->toUrl('/admin/sub-categorias');
-        }
-
         if ($id > 0) {
-            $form = new SubCategoriaForm();
-            $subCategoria = $entityManager->find('\Admin\Entity\SubCategoria', $id);
-            $form->bind($subCategoria);
-            return new ViewModel(array('form' => $form));
+            try {
+                $form = new SubCategoriaForm();
+                $tipoEndereco = $entityManager->find('Admin\Entity\SubCategoria', $id);
+                $form->bind($tipoEndereco);
+            } catch (\Exception $e) {
+                $this->flashMessenger()
+                    ->addErrorMessage('Erro ao tentar editar a subcategoria');
+                $this->redirect()->toUrl('/admin/subcategorias/index');
+            }
         }
 
-        $this->request->setStatusCode(404);
-        return $this->request;
+        return new ViewModel(
+            array
+            (
+                'form' => $form
+            )
+        );
     }
 
-    public function deleteAction() {
+    public function deleteAction()
+    {
         $id = $this->params()->fromRoute('id', 0);
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $subCategoria = $entityManager->find('\Admin\Entity\SubCategoria', $id);
         $entityManager->remove($subCategoria);
-        $entityManager->flush();
-
-        return $this->redirect()->toUrl('/admin/sub-categorias');
+        try {
+            $entityManager->flush();
+            $this->flashMessenger()
+                ->addSuccessMessage('Subcategoria excluida com sucesso.');
+            return $this->redirect()->toUrl('/admin/subcategorias/index');
+        } catch (\Exception $e) {
+            $this->flashMessenger()
+                ->addErrorMessage('Erro ao excluir uma subcategoria.');
+                return $this->redirect()->toUrl('/admin/subcategorias/index');
+        }
     }
-
 }

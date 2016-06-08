@@ -1,36 +1,44 @@
 <h1>Marcas</h1>
-<a href="/admin/marcas/save"><input type="button" class="btn btn-primary" value="Nova Marca" title="Inserir nova marca."></a>	
+<a href="/admin/marcas/save"><input type="button" 
+class="btn btn-primary" value="Nova Marca" title="Inserir nova marca."></a>	
 <br><br>
 
 <div class='panel panel-default'>
     <table class="table">
         <thead>
-            <tr>
+            <tr class="tabela">
                 <th>Descrição</th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($marcas as $marca) {
-                ?>
-                <tr>
-                    <td><?= $marca->descricao; ?></td>
+            ?>
+            <tr>
+                <td><?= $marca->descricao; ?></td>
 
-                    <td> <a href="/admin/marcas/save/id/<?= $marca->id_marca ?>">
-                            <span class="glyphicon glyphicon-pencil" title="Editar registro"></span> </a></td>
+                <td> 
+                    <a href="/admin/marcas/save/id/<?= $marca->id_marca ?>">
+                    <span class="glyphicon glyphicon-pencil" 
+                    title="Editar registros"></span> </a>
 
-                    <td><a href="/admin/marcas/delete/id/<?= $marca->id_marca ?>">
-                            <span class="glyphicon glyphicon-trash" title="Excluir registro"></span> </a></td>
-                </tr>
+                    <a href="/admin/marcas/delete/id/<?= $marca->id_marca ?>"
+                    onclick= "return confirm('Deseja excluir este registro?');">
+                    <span class="glyphicon glyphicon-trash" 
+                    title="Excluir registro"></span> </a>
+                </td>
+            </tr>
             <?php } ?>
         </tbody>
     </table>
 </div>
 
 <?php
-echo $this->paginationControl(
-        $marcas, 'sliding', 'partial/paginator.phtml', array(
-    'route' => 'marcas'
+    echo $this->paginationControl(
+        $marcas, 'sliding', 'partial/paginator.phtml', 
+        array
+        (
+            'route' => 'marcas'
         )
-);
+    );
 ?>

@@ -17,6 +17,7 @@
                 ->prependStylesheet($this->basePath('css/style.css'))
                 ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
                 ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+                ->prependStylesheet($this->basePath('css/simple-sidebar.css'))
         ?>
 
         <!-- Scripts -->
@@ -31,69 +32,106 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>
+        <div id="wrapper">
 
- <div class="container-fluid">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">Home</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Menu Lateral -->
+
+                    <!-- Sidebar -->
+                    <div id="sidebar-wrapper">
+                        <ul class="sidebar-nav">
+                            <li class="sidebar-brand">
+                                <a href="#"> Administração
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Cadastros</a>
+                            </li>
+                            <li>
+                                <a href="#">Shortcuts</a>
+                            </li>
+                            <li>
+                                <a href="#">Overview</a>
+                            </li>
+                            <li>
+                                <a href="#">Events</a>
+                            </li>
+                            <li>
+                                <a href="#">About</a>
+                            </li>
+                            <li>
+                                <a href="#">Services</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- /#sidebar-wrapper -->
+
             <!-- Msg Success -->
+            <div class="container-fluid">
+                <!-- Msg Success -->
 
-            <?php if ($this->flashMessenger()->getSuccessMessages()) { ?>
-                <div class="alert alert-success center">
-                    <?php
-                    foreach ($this->flashMessenger()->getSuccessMessages() as $msg) {
-                        echo $msg;
-                    }
-                    ?>
-                </div>
-            <?php } ?>
+                <?php if ($this->flashMessenger()->getSuccessMessages()) { ?>
+                    <div class="alert alert-success center">
+                        <?php
+                        foreach ($this->flashMessenger()->getSuccessMessages() as $msg) {
+                            echo $msg;
+                        }
+                        ?>
+                    </div>
+                <?php } ?>
 
-            <!-- Msg Error -->
+                <!-- Msg Error -->
 
-            <?php if ($this->flashMessenger()->getErrorMessages()) { ?>
-                <div class="alert alert-danger center">
-                    <?php
-                    foreach ($this->flashMessenger()->getErrorMessages() as $msg) {
-                        echo $msg;
-                    }
-                    ?>
-                </div>
-            <?php } ?>
+                <?php if ($this->flashMessenger()->getErrorMessages()) { ?>
+                    <div class="alert alert-danger center">
+                        <?php
+                        foreach ($this->flashMessenger()->getErrorMessages() as $msg) {
+                            echo $msg;
+                        }
+                        ?>
+                    </div>
+                <?php } ?>
 
-            <!-- Msg Infos -->
+                <!-- Msg Infos -->
 
-            <?php if ($this->flashMessenger()->getInfoMessages()) { ?>
-                <div class="alert alert-info center">
-                    <?php
-                    foreach ($this->flashMessenger()->getInfoMessages() as $msg) {
-                        echo $msg;
-                    }
-                    ?>
-                </div>
-            <?php } ?>
+                <?php if ($this->flashMessenger()->getInfoMessages()) { ?>
+                    <div class="alert alert-info center">
+                        <?php
+                        foreach ($this->flashMessenger()->getInfoMessages() as $msg) {
+                            echo $msg;
+                        }
+                        ?>
+                    </div>
+                <?php } ?>
+            </div>
+
+            <div class="container"><!--Usar container ou content -->
+                <?php echo $this->content; ?>
+                <hr>
+                <footer>
+                    <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                </footer>
+            </div> <!-- /container -->
+            <?php echo $this->inlineScript() ?>
         </div>
-
-        <div class="container">
-            <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
-            </footer>
-        </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
     </body>
 </html>

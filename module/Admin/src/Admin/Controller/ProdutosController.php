@@ -157,6 +157,17 @@ class ProdutosController extends AbstractActionController {
     return $this->request;
 }
 
+
+
+public function visualizarAction(){
+        $id = $this->params()->fromRoute('id', 0);
+        var_dump($id);exit;
+
+}
+
+
+
+
 public function deleteAction() {
     $id = $this->params()->fromRoute('id', 0);
     $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');

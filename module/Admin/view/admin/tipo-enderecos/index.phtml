@@ -1,28 +1,34 @@
-<a href="/admin/tipo-enderecos/create"><input type="button" class="btn btn-primary" value="Novo tipo endereço" title="Inserir novo tipo de endereço."></a>	
+<h1>Tipo de endereço</h1>
+<a href="/admin/tipo-enderecos/save"><input type="button" 
+    class="btn btn-primary" value="Novo tipo de endereço" 
+    title="Inserir novo tipo de endereço."></a>	
 <br><br>
 
 <div class='panel panel-default'>
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
+            <tr class="tabela">
                 <th>Descrição</th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($tipoEnderecos as $tipoEndereco) {
-                ?>
-                <tr>
-                    <td><?= $tipoEndereco->id_tipo_endereco; ?></td>
-                    <td><?= $tipoEndereco->descricao; ?></td>
+            ?>
+            <tr>
+                <td><?php echo $tipoEndereco->descricao; ?></td>
 
-                    <td> <a href="/admin/tipo-enderecos/update/id/<?= $tipoEndereco->id_tipo_endereco ?>">
-                            <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
+                <td>
+                    <a href="/admin/tipo-enderecos/save/id/<?= $tipoEndereco->id_tipo_endereco ?>">
+                    <span class="glyphicon glyphicon-pencil" 
+                    title="Editar registro"></span></a>
 
-                    <td> <a href="/admin/tipo-enderecos/delete/id/<?= $tipoEndereco->id_tipo_endereco ?>">
-                            <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
-                </tr>
+                     <a href="/admin/tipo-enderecos/delete/id/<?= $tipoEndereco->id_tipo_endereco ?>"
+                     onclick= "return confirm('Deseja excluir este registro?');">
+                    <span class="glyphicon glyphicon-trash" 
+                    title="Excluir registro"></span> </a>
+                </td>
+            </tr>
             <?php } ?>
         </tbody>
     </table>
@@ -30,7 +36,7 @@
 
 <?php
 echo $this->paginationControl(
-        $tipoEnderecos, 'sliding', 'partial/paginator.phtml', array(
+    $tipoEnderecos, 'sliding', 'partial/paginator.phtml', array(
     'route' => 'tipoEndereco'
         )
 );
