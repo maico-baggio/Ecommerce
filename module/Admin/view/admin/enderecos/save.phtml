@@ -1,0 +1,150 @@
+<?php
+$title = 'Manter endereço';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+?>
+
+<div class="form_element">
+    <?php
+    $nome_destinatario = $form->get('nome_do_destinatario');
+    echo $this->formRow($nome_destinatario);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $telefone = $form->get('telefone');
+    echo $this->formRow($telefone);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $tipo_endereco = $form->get('tipo_endereco');
+    echo $this->formRow($tipo_endereco);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $cep = $form->get('cep');
+    echo $this->formRow($cep);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $endereco = $form->get('endereco');
+    echo $this->formRow($endereco);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $bairro = $form->get('bairro');
+    echo $this->formRow($bairro);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $cidade = $form->get('cidade');
+    echo $this->formRow($cidade);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $estado = $form->get('estado');
+    echo $this->formRow($estado);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $numero = $form->get('numero');
+    echo $this->formRow($numero);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $complemento = $form->get('complemento');
+    echo $this->formRow($complemento);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $informacao_referencia = $form->get('informacao_referencia');
+    echo $this->formRow($informacao_referencia);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $salvar = $form->get('salvar');
+    echo $this->formRow($salvar);
+
+    $cancelar = $form->get('cancelar');
+    echo $this->formRow($cancelar);
+    ?>
+</div>
+
+<script>
+    /*   var d = {logradouro: "Rua Alfredo Wagner", bairro: "Alvorada", localidade: "Chapecó", uf: "SC"};
+     console.log(d.logradouro);    
+     $("input[name='endereco']").val(d.logradouro);
+     */
+    // Função para buscar o cep e preencher os campos com valores
+    function buscaCEP()
+    {
+        var cep = $("input[name='cep']").val();
+
+        $.get("/admin/enderecos/data/cep/" + cep, function (result) {
+
+            var d = JSON.parse(result);
+
+            //$('#endereco').val(d.logradouro);//id do campo
+
+            $("input[name='endereco']").val(d.logradouro);
+            $("input[name='bairro']").val(d.bairro);
+            $("input[name='cidade']").val(d.localidade);
+            $("input[name='estado']").val(d.uf);
+
+        });
+
+    }
+
+    //Função para receber apenas numeros
+    function SomenteNumero(e){
+        var tecla=(window.event)?event.keyCode:e.which;   
+            if((tecla>47 && tecla<58)) return true;
+            else{
+                if (tecla==8 || tecla==0) return true;
+            else  return false;
+            }
+        }
+    //mascara para os campos 
+    //telefone (## ####-####),
+    //celular (## #####-####) 
+    //cep (#####-###), 
+    function mascara(t, mask){
+        var i = t.value.length;
+        var saida = mask.substring(1,0);
+        var texto = mask.substring(i)
+        if (texto.substring(0,1) != saida){
+            t.value += texto.substring(0,1);
+         }
+    }
+
+</script>

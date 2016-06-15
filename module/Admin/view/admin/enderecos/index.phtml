@@ -1,18 +1,18 @@
-<a href="/admin/enderecos/create"><input type="button" value="Novo Endereço" title="Inserir novo endereço."></a>	
+<h1>Endereços</h1>
+<a href="/admin/enderecos/save"><input type="button" 
+   class="btn btn-primary" value="Novo Endereço" 
+   title="Inserir novo endereço."></a>	
 <br><br>
 
 <div class='panel panel-default'>
     <table class="table">
         <thead>
-            <tr>
+            <tr class="tabela">
                 <th>Nome do destinatário</th>
                 <th>Telefone</th>
-                <th>Tipo Endereco</th>
                 <th>CEP</th>
                 <th>Endereco</th>
                 <th>Numero</th>
-                <th>Complemento</th>
-                <th>Informação de referencia</th>
                 <th>Bairro</th>
                 <th>Cidade</th>
                 <th>Estado</th>
@@ -21,27 +21,26 @@
         <tbody>
             <?php
             foreach ($enderecos as $endereco) {
-                ?>
+            ?>
                 <tr>
 
                     <td><?= $endereco->nome_do_destinatario; ?></td>
                     <td><?= $endereco->telefone; ?></td>
-                    <td><?= $endereco->tipo_endereco->descricao; ?></td>
                     <td><?= $endereco->cep; ?></td>
                     <td><?= $endereco->endereco; ?></td>
                     <td><?= $endereco->numero; ?></td>
-                    <td><?= $endereco->complemento; ?></td>
-                    <td><?= $endereco->informacao_referencia; ?></td>
                     <td><?= $endereco->bairro; ?></td>
                     <td><?= $endereco->cidade; ?></td>
                     <td><?= $endereco->estado; ?></td>
 
-                    <td> <a href="/admin/enderecos/update/id/<?= $endereco->id_endereco ?>">
-                            <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
+                    <td> 
+                        <a href="/admin/enderecos/save/id/<?= $endereco->id_endereco ?>">
+                            <span class="glyphicon glyphicon-pencil" title="Editar registro"></span> </a>
 
-                    <td> <a href="/admin/enderecos/delete/id/<?= $endereco->id_endereco ?>"
-                            onclick= "return confirm('Tem certeza que deseja excluir este registro?');">
-                            <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
+                        <a href="/admin/enderecos/delete/id/<?= $endereco->id_endereco ?>"
+                        onclick= "return confirm('Deseja excluir este registro?');">
+                        <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a>
+                    </td>
                 </tr>
             <?php } ?>
         </tbody>

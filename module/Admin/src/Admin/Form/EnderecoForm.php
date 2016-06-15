@@ -31,7 +31,8 @@ class EnderecoForm extends Form {
             ),
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
-                'class' => 'form-control'
+                'class' => 'form-control ',
+                'size' => '40'
             ),
         ));
 
@@ -42,8 +43,11 @@ class EnderecoForm extends Form {
                 'label' => 'Telefone*:'
             ),
             'attributes' => array(
-                //'placeholder' => 'Ex: fulano10',
-                'class' => 'form-control'
+                'placeholder' => 'Ex: 00 0000-0000',
+                'class' => 'form-control',
+                'onkeypress' => 'mascara(this, "## ####-####")',
+                'maxlength' => '13',
+                'size' => '32',
             ),
         ));
 
@@ -76,7 +80,11 @@ class EnderecoForm extends Form {
                     'attributes' => array(
                         'placeholder' => 'Ex: 00000000',
                         'class' => 'form-control',
-                        'onchange' => 'buscaCEP();'
+                        'onchange' => 'buscaCEP();',
+                        'onkeypress' => 'return SomenteNumero(event);',//Função para receber apenas numeros.
+                        //'onkeypress' => 'mascara(this, "#####-###")',
+                        'size' => '32',
+                        'maxlength' => '9'
                     ),
                 )
         );
@@ -89,7 +97,8 @@ class EnderecoForm extends Form {
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
                 'class' => 'form-control',
-                'readonly' => 'true'
+                'readonly' => 'true',
+                'size' => '32'
             ),
         ));
         $this->add(array(
@@ -101,7 +110,8 @@ class EnderecoForm extends Form {
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
                 'class' => 'form-control',
-                'readonly' => 'true'
+                'readonly' => 'true',
+                'size' => '32'
             ),
         ));
 
@@ -114,7 +124,8 @@ class EnderecoForm extends Form {
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
                 'class' => 'form-control',
-                'readonly' => 'true'
+                'readonly' => 'true',
+                'size' => '32'
             ),
         ));
 
@@ -127,7 +138,8 @@ class EnderecoForm extends Form {
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
                 'class' => 'form-control',
-                'readonly' => 'true'
+                'readonly' => 'true',
+                'size' => '32'
             ),
         ));
 
@@ -140,7 +152,8 @@ class EnderecoForm extends Form {
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
                 'class' => 'form-control',
-            //'id' => 'numero'
+                'onkeypress' => 'return SomenteNumero(event);',//Função para receber apenas numeros.
+                'size' => '32'
             ),
         ));
 
@@ -152,7 +165,8 @@ class EnderecoForm extends Form {
             ),
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
-                'class' => 'form-control'
+                'class' => 'form-control',
+                'size' => '32'
             ),
         ));
 
@@ -164,7 +178,8 @@ class EnderecoForm extends Form {
             ),
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
-                'class' => 'form-control'
+                'class' => 'form-control',
+                'size' => '32'
             ),
         ));
 
@@ -176,6 +191,19 @@ class EnderecoForm extends Form {
                 'class' => 'btn btn-primary'
             )
         ));
-    }
 
+        $this->add(array(
+            'type' => 'button',
+            'name' => 'cancelar',
+            'attributes' => array(
+                'value' => 'Cancelar',
+                'class' => 'btn',
+                'onclick' => "location.href='/admin/enderecos/index'",
+                'title' => 'Cancelar'
+            ),
+            'options' => array(
+                'label' => 'Cancelar'
+            )
+        ));
+    }
 }

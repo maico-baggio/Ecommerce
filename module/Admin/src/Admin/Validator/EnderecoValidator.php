@@ -42,7 +42,7 @@ class EnderecoValidator extends InputFilter {
 
         $this->add($factory->createInput(array(
             'name' => 'tipo_endereco',
-            'required' => false,
+            'required' => true,
             'filters' => array(
                 array('name' => 'Int'),
                 ),
@@ -55,6 +55,14 @@ class EnderecoValidator extends InputFilter {
                 array('name' => 'Int'),
                 ),
             )));
+
+       // $this->add($factory->createInput(array(
+       //       'name' => 'cep',
+       //       'required' => true,
+       //       'validators' => array(
+       //           array('name' => 'Isint'),  //IsInt
+       //           ),
+       //       )));
 
         $this->add($factory->createInput(array(
             'name' => 'endereco',
@@ -86,6 +94,14 @@ class EnderecoValidator extends InputFilter {
                 array('name' => 'Int'),
                 ),
             )));
+
+            //     $this->add($factory->createInput(array(
+            // 'name' => 'numero',
+            // 'required' => true,
+            // 'validators' => array(
+            //     array('name' => 'IsInt'),  //IsInt
+            //     ),
+            // )));
 
 
         // $this->add($factory->createInput(array(
