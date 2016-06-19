@@ -12,13 +12,6 @@ namespace Admin\Form;
 use Zend\Form\Form;
 use Zend\InputFilter;
 
-use Zend\Form\Element;
-
-use Doctrine\ORM\EntityManager;
-use Zend\InputFilter\Factory as InputFactory;
-//use Zend\InputFilter\InputFilterAwareInterface;
-//use Zend\InputFilter\InputFilterInterface;
-
 /**
  * Form para cadastrar produtos
  * @category Admin
@@ -196,8 +189,7 @@ class ProdutoForm extends Form {
                 'label' => 'Cancelar'
                 )
             ));
-
-        //$this->addInputFilter();
+        $this->addInputFilter();
     }
 
     public function addInputFilter()
@@ -216,37 +208,10 @@ class ProdutoForm extends Form {
                 )
             );
             
-            $factory = new InputFactory();
-
-        $this->add($factory->createInput(array(
-           'name' => 'nome',
-           'required' => true,
-           'filters' => array(
-               array('name' => 'StripTags'),
-               array('name' => 'StringTrim'),
-               array('name' => 'StringToUpper',
-                   'options' => array('encoding' => 'UTF-8')
-                   ),
-               ),
-           'validators' => array(
-               array(
-                   'name' => 'StringLength',
-                   'options' => array(
-                       'encoding' => 'UTF-8',
-                       'min' => 3,
-                       'max' => 255,
-                       ),
-                   ),
-               array(
-                   'name' => 'NotEmpty',
-                   )),
-           )));
-
 
         $inputFilter->add($fileInput);
+        $this->setInputFilter($inputFilter);
 
-        //$this->setInputFilter($inputFilter);
-        $this->inputFilter = $inputFilter;
     }
     
     public function getOptions()
