@@ -52,8 +52,8 @@ echo $this->formHidden($form->get('id'));
     <div class="row">
     	<div class="col-sm-2">
 			<?php
-			$categorias = $form->get('categorias');
-			echo $this->formMultiCheckbox($categorias);
+                $categorias = $form->get('categorias');			
+			    echo $this->formRow($categorias);
 			?>
 		</div>
     </div>

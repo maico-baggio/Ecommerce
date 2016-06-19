@@ -12,11 +12,18 @@ namespace Admin\Form;
 use Zend\Form\Form;
 use Zend\InputFilter;
 
+use Zend\Form\Element;
+
+use Doctrine\ORM\EntityManager;
+use Zend\InputFilter\Factory as InputFactory;
+//use Zend\InputFilter\InputFilterAwareInterface;
+//use Zend\InputFilter\InputFilterInterface;
+
 /**
  * Form para cadastrar produtos
  * @category Admin
  * @package form
- * @author Maico Baggio <maico.baggio@unochapeco.edu.br>
+ * @author Maico <email@eamil.com>
  */
 class ProdutoForm extends Form {
 
@@ -31,50 +38,50 @@ class ProdutoForm extends Form {
         $this->add(array(
             'name' => 'id',
             'type' => 'hidden'
-        ));
+            ));
         $this->add(array(
             'name' => 'nome',
             'type' => 'text',
             'options' => array(
-                'label' => 'Nome*:'
-            ),
+                'label' => 'Produto*:'
+                ),
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
                 //'class' => 'form-control'
                 'class'  => 'form-control',
                 'size' => '35'
-            ),
-        ));
+                ),
+            ));
         $this->add(
-                array(
-                    'name' => 'descricao',
-                    'type' => 'textarea',
-                    'height' => '500px',
-                    'options' => array(
-                        'label' => 'Descrição*:'
+            array(
+                'name' => 'descricao',
+                'type' => 'textarea',
+                'height' => '500px',
+                'options' => array(
+                    'label' => 'Descrição*:'
                     ),
-                    'attributes' => array(
+                'attributes' => array(
                         //'placeholder' => 'Ex: fulano10',
-                        'class' => 'form-control',
-                        'cols' => '30',
-                        'rows' => '8'
-                        
+                    'class' => 'form-control',
+                    'cols' => '30',
+                    'rows' => '8'
+
                     ),
                 )
-        );
+            );
         $this->add(array(
             'name' => 'valor',
             'type' => 'text',
             'options' => array(
                 'label' => 'Valor*:'
-            ),
+                ),
             'attributes' => array(
                 'placeholder' => 'Ex: 00.00',
                 'class' => 'form-control',
                 'style' => 'text-align: right;',
                 //'onkeypress' => 'return SomenteNumero(event);',//Função para receber apenas numeros.
-            ),
-        ));
+                ),
+            ));
         $this->add(array(
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'name' => 'marca',
@@ -87,12 +94,12 @@ class ProdutoForm extends Form {
                 'label_generator' => function($target) {
                     return $target->descricao;
                 }
-            ),
+                ),
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
                 'class' => 'form-control'
-            ),
-        ));
+                ),
+            ));
 
         $this->add(array(
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
@@ -106,12 +113,12 @@ class ProdutoForm extends Form {
                 'label_generator' => function($target) {
                     return $target->descricao;
                 }
-            ),
+                ),
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
                 'class' => 'form-control'
-            ),
-        ));
+                ),
+            ));
 
         $this->add(array(
             'type' => 'DoctrineModule\Form\Element\ObjectMultiCheckbox',
@@ -124,48 +131,48 @@ class ProdutoForm extends Form {
                 'empty_option' => 'SELECIONE UMA CATEGORIA',
                 'label_generator' => function($target) {
                     return $target->descricao;
-                
+
                 }
-            ),
+                ),
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
                  //'class' => 'form-control'
-            ),
-        ));
+                ),
+            ));
 
         $this->add(
             array(
-            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
-            'name' => 'subcategoria',
-            'options' => array(
-                'label' => 'Sub Categoria*:',
-                'object_manager' => $em,
-                'target_class' => '\Admin\Entity\SubCategoria',
-                'property' => 'descricao',
-                'empty_option' => 'SELECIONE UMA SUB CATEGORIA',
-                'label_generator' => function($target) {
-                    return $target->descricao;
-                }
-            ),
-            'attributes' => array(
+                'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+                'name' => 'subcategoria',
+                'options' => array(
+                    'label' => 'Sub Categoria*:',
+                    'object_manager' => $em,
+                    'target_class' => '\Admin\Entity\SubCategoria',
+                    'property' => 'descricao',
+                    'empty_option' => 'SELECIONE UMA SUB CATEGORIA',
+                    'label_generator' => function($target) {
+                        return $target->descricao;
+                    }
+                    ),
+                'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
-                'class' => 'form-control'
-            ),
-        ));
+                    'class' => 'form-control'
+                    ),
+                ));
 
         $this->add(
-                array(
-                    'name' => 'photo',
-                    'type' => 'file',
-                    'options' => array(
-                        'label' => 'Foto*',
+            array(
+                'name' => 'photo',
+                'type' => 'file',
+                'options' => array(
+                    'label' => 'Foto*',
                     ),
-                    'attributes' => array(
+                'attributes' => array(
                     //'class' => 'form-control',
                     //'multiple' => true,
                     )
                 )
-        );
+            );
 
         $this->add(array(
             'name' => 'salvar',
@@ -173,8 +180,8 @@ class ProdutoForm extends Form {
             'attributes' => array(
                 'value' => 'Salvar',
                 'class' => 'btn btn-primary'
-            )
-        ));
+                )
+            ));
 
         $this->add(array(
             'type' => 'button',
@@ -184,32 +191,62 @@ class ProdutoForm extends Form {
                 'class' => 'btn',
                 'onclick' => "location.href='/admin/produtos/index'",
                 'title' => 'Cancelar'
-            ),
+                ),
             'options' => array(
                 'label' => 'Cancelar'
-            )
-        ));
+                )
+            ));
 
-        $this->addInputFilter();
+        //$this->addInputFilter();
     }
 
-    public function addInputFilter() {
+    public function addInputFilter()
+    {
         $inputFilter = new InputFilter\InputFilter();
         $fileInput = new InputFilter\FileInput('photo');
         $fileInput->setRequired(true);
         $fileInput->getValidatorChain()
-                ->attachByName('filesize', array('max' => 400000))
-                ->attachByName('filemimetype', array('mimeType' => 'image/jpeg'))
-                ->attachByName('fileimagesize', array('maxWidth' => 1366, 'maxHeight' => 1080));
+        ->attachByName('filesize', array('max' => 400000))
+        ->attachByName('filemimetype', array('mimeType' => 'image/jpeg'))
+        ->attachByName('fileimagesize', array('maxWidth' => 1366, 'maxHeight' => 1080));
         $fileInput->getFilterChain()->attachByName(
-                'filerenameupload', array(
-            'target' => getcwd() . '/public/img/photos_produtos/photo.jpg',
-            'randomize' => true,
+            'filerenameupload', array(
+                'target' => getcwd() . '/public/img/photos_produtos/photo.jpg',
+                'randomize' => true,
                 )
-        );
+            );
+            
+            $factory = new InputFactory();
+
+        $this->add($factory->createInput(array(
+           'name' => 'nome',
+           'required' => true,
+           'filters' => array(
+               array('name' => 'StripTags'),
+               array('name' => 'StringTrim'),
+               array('name' => 'StringToUpper',
+                   'options' => array('encoding' => 'UTF-8')
+                   ),
+               ),
+           'validators' => array(
+               array(
+                   'name' => 'StringLength',
+                   'options' => array(
+                       'encoding' => 'UTF-8',
+                       'min' => 3,
+                       'max' => 255,
+                       ),
+                   ),
+               array(
+                   'name' => 'NotEmpty',
+                   )),
+           )));
+
+
         $inputFilter->add($fileInput);
 
-        $this->setInputFilter($inputFilter);
+        //$this->setInputFilter($inputFilter);
+        $this->inputFilter = $inputFilter;
     }
     
     public function getOptions()
