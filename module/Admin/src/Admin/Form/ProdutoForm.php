@@ -41,19 +41,24 @@ class ProdutoForm extends Form {
             'attributes' => array(
                 //'placeholder' => 'Ex: fulano10',
                 //'class' => 'form-control'
-                'class'  => 'form-horizontal'
+                'class'  => 'form-control',
+                'size' => '35'
             ),
         ));
         $this->add(
                 array(
                     'name' => 'descricao',
                     'type' => 'textarea',
+                    'height' => '500px',
                     'options' => array(
                         'label' => 'Descrição*:'
                     ),
                     'attributes' => array(
                         //'placeholder' => 'Ex: fulano10',
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'cols' => '30',
+                        'rows' => '8'
+                        
                     ),
                 )
         );
@@ -64,19 +69,10 @@ class ProdutoForm extends Form {
                 'label' => 'Valor*:'
             ),
             'attributes' => array(
-                //'placeholder' => 'Ex: fulano10',
-                'class' => 'form-control'
-            ),
-        ));
-        $this->add(array(
-            'name' => 'margem_de_lucro',
-            'type' => 'text',
-            'options' => array(
-                'label' => 'Margem de lucro*:'
-            ),
-            'attributes' => array(
-                //'placeholder' => 'Ex: fulano10',
-                'class' => 'form-control'
+                'placeholder' => 'Ex: 00.00',
+                'class' => 'form-control',
+                'style' => 'text-align: right;',
+                //'onkeypress' => 'return SomenteNumero(event);',//Função para receber apenas numeros.
             ),
         ));
         $this->add(array(
@@ -91,6 +87,10 @@ class ProdutoForm extends Form {
                 'label_generator' => function($target) {
                     return $target->descricao;
                 }
+            ),
+            'attributes' => array(
+                //'placeholder' => 'Ex: fulano10',
+                'class' => 'form-control'
             ),
         ));
 
@@ -107,6 +107,10 @@ class ProdutoForm extends Form {
                     return $target->descricao;
                 }
             ),
+            'attributes' => array(
+                //'placeholder' => 'Ex: fulano10',
+                'class' => 'form-control'
+            ),
         ));
 
         $this->add(array(
@@ -120,11 +124,17 @@ class ProdutoForm extends Form {
                 'empty_option' => 'SELECIONE UMA CATEGORIA',
                 'label_generator' => function($target) {
                     return $target->descricao;
+                
                 }
+            ),
+            'attributes' => array(
+                //'placeholder' => 'Ex: fulano10',
+                 //'class' => 'form-control'
             ),
         ));
 
-        $this->add(array(
+        $this->add(
+            array(
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'name' => 'subcategoria',
             'options' => array(
@@ -136,6 +146,10 @@ class ProdutoForm extends Form {
                 'label_generator' => function($target) {
                     return $target->descricao;
                 }
+            ),
+            'attributes' => array(
+                //'placeholder' => 'Ex: fulano10',
+                'class' => 'form-control'
             ),
         ));
 
@@ -154,7 +168,7 @@ class ProdutoForm extends Form {
         );
 
         $this->add(array(
-            'name' => 'Salvar',
+            'name' => 'salvar',
             'type' => 'submit',
             'attributes' => array(
                 'value' => 'Salvar',
@@ -162,14 +176,19 @@ class ProdutoForm extends Form {
             )
         ));
 
-//        $this->add(array(
-//            'name' => 'cancelar',
-//            'type' => 'button',
-//            'attributes' => array(
-//                'value' => 'Cancelar',
-//                'onclick' => 'href=/admin/produtos',
-//            )
-//        ));
+        $this->add(array(
+            'type' => 'button',
+            'name' => 'cancelar',
+            'attributes' => array(
+                'value' => 'Cancelar',
+                'class' => 'btn',
+                'onclick' => "location.href='/admin/produtos/index'",
+                'title' => 'Cancelar'
+            ),
+            'options' => array(
+                'label' => 'Cancelar'
+            )
+        ));
 
         $this->addInputFilter();
     }
@@ -179,9 +198,9 @@ class ProdutoForm extends Form {
         $fileInput = new InputFilter\FileInput('photo');
         $fileInput->setRequired(true);
         $fileInput->getValidatorChain()
-                ->attachByName('filesize', array('max' => 204800))
+                ->attachByName('filesize', array('max' => 400000))
                 ->attachByName('filemimetype', array('mimeType' => 'image/jpeg'))
-                ->attachByName('fileimagesize', array('maxWidth' => 1000, 'maxHeight' => 1000));
+                ->attachByName('fileimagesize', array('maxWidth' => 1366, 'maxHeight' => 1080));
         $fileInput->getFilterChain()->attachByName(
                 'filerenameupload', array(
             'target' => getcwd() . '/public/img/photos_produtos/photo.jpg',
@@ -194,8 +213,8 @@ class ProdutoForm extends Form {
     }
     
     public function getOptions()
-{
-    return array('class' => 'form-horizontal');
-}
+    {
+        return array('class' => 'form-horizontal');
+    }
 
 }

@@ -55,12 +55,12 @@ class Produto {
      */
     protected $valor;
 
-    /**
-     * @ORM\Column(type="float")
-     *
-     * @var float $margem_de_lucro
-     */
-    protected $margem_de_lucro;
+    // *
+    //  * @ORM\Column(type="float")
+    //  *
+    //  * @var float $margem_de_lucro
+     
+    // protected $margem_de_lucro;
 
     /**
      * @ORM\ManyToOne(targetEntity="Marca", inversedBy="produto")   

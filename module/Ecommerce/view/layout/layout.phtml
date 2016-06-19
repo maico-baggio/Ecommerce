@@ -1,82 +1,76 @@
 <?php echo $this->doctype(); ?>
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
-        <?php
-        echo $this->headMeta()
-                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ?>
+    <?php
+    echo $this->headMeta()
+    ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+    ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
 
-        <!-- Le styles -->
-        <?php
-        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                ->prependStylesheet($this->basePath('css/style.css'))
-                ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-                ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
-                ->prependStylesheet($this->basePath('css/simple-sidebar.css'))
-        ?>
+    <!-- Le styles -->
+    <?php
+    echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+    ->prependStylesheet($this->basePath('css/style.css'))
+    ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+    ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+    ->prependStylesheet($this->basePath('css/simple-sidebar.css'))
+                //->prependStylesheet($this->basePath('css/produtos.css'))
+    ?>
 
-        <!-- Scripts -->
-        <?php
-        echo $this->headScript()
-                ->prependFile($this->basePath('js/bootstrap.min.js'))
-                ->prependFile($this->basePath('js/jquery.min.js'))
-                ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
-                ->prependFile($this->basePath('js/html5shiv.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
-        ;
-        ?>
+    <!-- Scripts -->
+    <?php
+    echo $this->headScript()
+    ->prependFile($this->basePath('js/bootstrap.min.js'))
+    ->prependFile($this->basePath('js/jquery.min.js'))
+    ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+    ->prependFile($this->basePath('js/html5shiv.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+    ;
+    ?>
 
-    </head>
-    <body>
-        <div id="wrapper">
+</head>
+<body>
+    <div id="wrapper">
 
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/">Home</a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Help</a></li>
-                        </ul>
-                    </div>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
 
-                    <!-- Menu Lateral -->
+                <div class="navbar-header  collapse navbar-collapse teste">
+                    <a class="navbar-brand teste" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Cezão Equipamentos') ?></a>
+                </div>
+                <div class="collapse navbar-collapse teste">
 
-                    <!-- Sidebar -->
-                    <div id="sidebar-wrapper">
-                        <ul class="sidebar-nav">
-                            <li class="sidebar-brand">
+                </div><!--/.nav-collapse -->
+
+                <!-- Menu Lateral -->
+
+                <!-- Sidebar -->
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                       <!--     <li class="sidebar-brand">
                                 <a href="#"> Administração
                                 </a>
+                            </li> -->
+                            <li>
+                                <a href="/admin/marcas/index">Marca</a>
                             </li>
                             <li>
-                                <a href="#">Cadastros</a>
+                                <a href="/admin/subcategorias/index">Subcategoria</a>
                             </li>
                             <li>
-                                <a href="#">Shortcuts</a>
+                                <a href="/admin/categorias/index">Categoria</a>
                             </li>
                             <li>
-                                <a href="#">Overview</a>
+                                <a href="/admin/tipo-enderecos/index">Tipo Endereço</a>
                             </li>
                             <li>
-                                <a href="#">Events</a>
+                                <a href="/admin/enderecos/index">Endereço</a>
                             </li>
                             <li>
-                                <a href="#">About</a>
-                            </li>
-                            <li>
-                                <a href="#">Services</a>
-                            </li>
-                            <li>
-                                <a href="#">Contact</a>
+                                <a href="/admin/produtos/index">Produtos</a>
                             </li>
                         </ul>
                     </div>
@@ -97,41 +91,41 @@
                         }
                         ?>
                     </div>
-                <?php } ?>
+                    <?php } ?>
 
-                <!-- Msg Error -->
+                    <!-- Msg Error -->
 
-                <?php if ($this->flashMessenger()->getErrorMessages()) { ?>
-                    <div class="alert alert-danger center">
-                        <?php
-                        foreach ($this->flashMessenger()->getErrorMessages() as $msg) {
-                            echo $msg;
-                        }
-                        ?>
+                    <?php if ($this->flashMessenger()->getErrorMessages()) { ?>
+                        <div class="alert alert-danger center">
+                            <?php
+                            foreach ($this->flashMessenger()->getErrorMessages() as $msg) {
+                                echo $msg;
+                            }
+                            ?>
+                        </div>
+                        <?php } ?>
+
+                        <!-- Msg Infos -->
+
+                        <?php if ($this->flashMessenger()->getInfoMessages()) { ?>
+                            <div class="alert alert-info center">
+                                <?php
+                                foreach ($this->flashMessenger()->getInfoMessages() as $msg) {
+                                    echo $msg;
+                                }
+                                ?>
+                            </div>
+                            <?php } ?>
+                        </div>
+
+                        <div class="container"><!--Usar container ou content -->
+                            <?php echo $this->content; ?>
+                            <hr>
+                            <footer>
+                                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                            </footer>
+                        </div> <!-- /container -->
+                        <?php echo $this->inlineScript() ?>
                     </div>
-                <?php } ?>
-
-                <!-- Msg Infos -->
-
-                <?php if ($this->flashMessenger()->getInfoMessages()) { ?>
-                    <div class="alert alert-info center">
-                        <?php
-                        foreach ($this->flashMessenger()->getInfoMessages() as $msg) {
-                            echo $msg;
-                        }
-                        ?>
-                    </div>
-                <?php } ?>
-            </div>
-
-            <div class="container"><!--Usar container ou content -->
-                <?php echo $this->content; ?>
-                <hr>
-                <footer>
-                    <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
-                </footer>
-            </div> <!-- /container -->
-            <?php echo $this->inlineScript() ?>
-        </div>
-    </body>
-</html>
+                </body>
+                </html>

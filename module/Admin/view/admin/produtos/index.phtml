@@ -1,4 +1,5 @@
-<a href="/admin/produtos/create"><input type="button" value="Novo Produto" title="Inserir novo produto."></a>	
+<a href="/admin/produtos/create"><input type="button" 
+ class="btn btn-primary" value="Novo Produto" title="Inserir novo produto."></a>	
 <br><br>
 
 <div class='panel panel-default'>
@@ -13,7 +14,6 @@
                 <th>Sub Categoria</th>
                 <th>Categoria</th>
                 <th>Valor</th>
-                <th>Margem de lucro</th>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +31,6 @@
                     <td><?= $produto->subcategoria->descricao; ?></td>
                     <td><?= $produto->categorias->descricao; ?></td>
                     <td><?= $produto->valor; ?></td>
-                    <td><?= $produto->margem_de_lucro; ?></td>
 
                     <td> <a href="/admin/produtos/update/id/<?= $produto->id_produto ?>">
                         <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>

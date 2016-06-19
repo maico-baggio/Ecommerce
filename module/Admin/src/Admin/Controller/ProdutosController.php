@@ -84,7 +84,7 @@ class ProdutosController extends AbstractActionController {
                 $produto->nome = $values['nome'];
                 $produto->descricao = $values['descricao'];
                 $produto->valor = $values['valor'];
-                $produto->margem_de_lucro = $values['margem_de_lucro'];
+                //$produto->margem_de_lucro = $values['margem_de_lucro'];
                 $produto->modelo = $em->find('\Admin\Entity\Modelo', $values['modelo']);
                 $produto->subcategoria = $em->find('\Admin\Entity\SubCategoria', $values['subcategoria']);
 
@@ -121,7 +121,7 @@ class ProdutosController extends AbstractActionController {
         $produto->nome = $values['nome'];
         $produto->descricao = $values['descricao'];
         $produto->valor = $values['valor'];
-        $produto->margem_de_lucro = $values['margem_de_lucro'];
+        //$produto->margem_de_lucro = $values['margem_de_lucro'];
         $produto->modelo = $em->find('\Admin\Entity\Modelo', $values['modelo']);
         $produto->subcategoria = $em->find('\Admin\Entity\SubCategoria', $values['subcategoria']);
 

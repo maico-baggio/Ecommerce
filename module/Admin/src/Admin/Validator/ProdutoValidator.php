@@ -75,18 +75,6 @@ class ProdutoValidator extends InputFilter {
                         )),
         )));
         
-                $this->add($factory->createInput(array(
-                    'name' => 'margem_de_lucro',
-                    'required' => true,
-                    'filters' => array(
-                        array('name' => 'Int'),
-                    ),
-            'validators' => array(
-                        array(
-                            'name' => 'NotEmpty',
-                        )),
-        )));
-        
 //                $this->add($factory->createInput(array(
 //                    'name' => 'marca',
 //                    'required' => true,

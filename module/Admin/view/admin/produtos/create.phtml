@@ -1,5 +1,92 @@
 <?php
+$title = 'Manter produto';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+
+$form->prepare();
+
 echo $this->form()->openTag($form);
-echo $this->formCollection($form);
-echo $this->form()->closeTag();
+echo $this->formHidden($form->get('id'));
+?>
+
+<div class="form_element">
+    <?php
+    $nome = $form->get('nome');
+    echo $this->formRow($nome);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $descricao = $form->get('descricao');
+    echo $this->formRow($descricao);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $valor = $form->get('valor');
+    echo $this->formRow($valor);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $marca = $form->get('marca');
+    echo $this->formRow($marca);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $modelo = $form->get('modelo');
+    echo $this->formRow($modelo);
+    ?>
+</div>
+
+<div class="form_element">
+    <div class="row">
+    	<div class="col-sm-2">
+			<?php
+			$categorias = $form->get('categorias');
+			echo $this->formMultiCheckbox($categorias);
+			?>
+		</div>
+    </div>
+</div>
+<br />
+
+<div class="form_element">
+    <?php
+    $subcategoria = $form->get('subcategoria');
+    echo $this->formRow($subcategoria);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $photo = $form->get('photo');
+    echo $this->formRow($photo);
+    ?>
+</div>
+
+
+<div class="form_element">
+    <?php
+    $salvar = $form->get('salvar');
+    echo $this->formRow($salvar);
+
+    $cancelar = $form->get('cancelar');
+    echo $this->formRow($cancelar);
+    ?>
+</div>
+
+<?php
+// echo $this->form()->openTag($form);
+// echo $this->formCollection($form);
+// echo $this->form()->closeTag();
 ?>
