@@ -1,12 +1,4 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -14,8 +6,38 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+    // protected $sm;
+
+    // public function __construct($sm)
+    // {
+    //     $this->sm = $sm;
+    // }
+
     public function indexAction()
     {
-        return new ViewModel();
+        // $session = $this->sm->get('Session');
+
+        // var_dump($session->offsetGet('user'));exit;
+
+
+         // /$this->layout('layout/teste');
+        //return $this->redirect()->toUrl('/application/auth/login');
+
+        return new ViewModel(array(
+        ));
+    }
+
+        public function logadoAction()
+    {
+        // $session = $this->sm->get('Session');
+
+        // var_dump($session->offsetGet('user'));exit;
+
+
+         // /$this->layout('layout/teste');
+        //return $this->redirect()->toUrl('/application/auth/login');
+
+        return new ViewModel(array(
+        ));
     }
 }

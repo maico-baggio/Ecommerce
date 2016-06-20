@@ -9,6 +9,11 @@
 
 namespace Application;
 
+use Application\Service\ACLService;
+use Application\Service\AuthService;
+use Application\Service\PostPublishedService;
+use Zend\Cache\StorageFactory;
+
 return array(
     'router' => array(
         'routes' => array(
@@ -52,8 +57,29 @@ return array(
                     ),
                 ),
             ),
+            'paginator' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => 'index[page/:page]',
+                    'defaults' => array(
+                        'page' => 1,
+                    ),
+                ),
+            ),
         ),
     ),
+    'doctrine' => array(
+        'driver' => array(
+            'application_entities' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(__DIR__ . '/../src/Ecommerce/Entity')
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    'Application\Entity' => 'application_entities'
+                )
+    ))),
     'service_manager' => array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -61,6 +87,38 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'AuthService' => function($sm) {
+                return new AuthService($sm);
+            },
+            'Session' => function ($sm) {
+                return new \Zend\Session\Container('Exemplo');
+            },
+            'ACLService' => function($sm) {
+                return new ACLService($sm);
+            },
+            'PostPublishedService' => function($sm) {
+                $entity_manager = $sm->get('Doctrine\ORM\EntityManager');
+
+                return new PostPublishedService($entity_manager, $sm);
+            },
+            'Cache' => function ($sm) {
+                $config = include __DIR__ . '/../../../config/application.config.php';
+                $cache = StorageFactory::factory(array(
+                    'adapter' => array(
+                        'name' => $config['cache']['adapter'],
+                        'options' => array(
+                            'ttl' => 300,
+                            'cacheDir' => __DIR__ . '/../../../data/cache'
+                        ),
+                    ),
+                    'plugins' => array(
+                        'exception_handler' => array('throw_exceptions' => false),
+                        'Serializer'
+                    )
+                ));
+
+                return $cache;
+            }
         ),
     ),
     'translator' => array(
@@ -75,7 +133,6 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => Controller\IndexController::class
         ),
     ),
     'view_manager' => array(

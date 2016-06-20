@@ -10,6 +10,7 @@ use Zend\View\Model\ViewModel;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
+use Zend\Session\Container as SessionContainer;
 
 /**
  * Controlador para cadastrar novas marcas.
@@ -21,6 +22,14 @@ use Zend\Paginator\Paginator;
 
 class MarcasController extends AbstractActionController
 {
+
+    protected $sl;
+
+    public function __construct($sl)
+    {
+        $this->sl = $sl;
+    }
+        
     /**
     *
     * Lista as marcas cadastradas
@@ -28,6 +37,10 @@ class MarcasController extends AbstractActionController
     */
     public function indexAction() 
     {
+
+        // $session = new SessionContainer('Session');
+        // var_dump($session->login);exit;
+
         $page = (int) $_GET['page'];
         $entityManager = $this->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');

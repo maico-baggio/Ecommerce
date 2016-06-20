@@ -1,0 +1,50 @@
+<h1>Usuários</h1>
+<a href="/auth/users/save"><input type="button" 
+   class="btn btn-primary" value="Novo Usuário" 
+   title="Inserir novo usuário."></a> 
+<br><br>
+<div class='panel panel-default'>
+    <table class="table">
+        <thead>
+            <tr class="tabela">
+                <th>Nome</th>
+                <th>Login</th>
+                <th>E-mail</th>
+                <th>Ativo</th>
+                <th>Perfil</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($users as $user) {
+            ?>
+                <tr>
+                    <td><?= $user->nome; ?></td>
+                    <td><?= $user->login; ?></td>
+                    <td><?= $user->email; ?></td>
+                    <td><?= $user->active; ?></td>
+                    <td><?= $user->role; ?></td>
+                    <td> 
+                        <a href="/auth/users/save/id/<?= $user->id_user ?>">
+                        <span class="glyphicon glyphicon-pencil" 
+                        title="Editar registro"></span> </a>
+
+                        <a href="/auth/users/delete/id/<?php echo 
+                        $user->id_user ?>"
+                        onclick= "return confirm('Deseja excluir este registro?');">
+                        <span class="glyphicon glyphicon-trash" 
+                        title="Editar registro"></span> </a>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+<?php
+    echo $this->paginationControl(
+        $users, 'sliding', 'partial/paginator.phtml', 
+        array(
+            'route' => 'users'
+        )
+    );
+?>

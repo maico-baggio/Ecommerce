@@ -1,0 +1,65 @@
+<?php
+$title = 'Manter Usuário';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+?>
+
+<div class="form_element">
+    <?php
+    $nome = $form->get('nome');
+    echo $this->formRow($nome);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $login = $form->get('login');
+    echo $this->formRow($login);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $email = $form->get('email');
+    echo $this->formRow($email);
+    ?>
+</div>
+
+<div class="form_element">
+    <?php
+    $password = $form->get('password');
+    echo $this->formRow($password);
+    ?>
+</div>
+
+<div class="form_element">
+	<?php
+        $role = $form->get('role');			
+	    echo $this->formRow($role);
+	?>
+</div>
+
+<div class="form_element">
+    <?php
+    $salvar = $form->get('salvar');
+    echo $this->formRow($salvar);
+
+    $cancelar = $form->get('cancelar');
+    echo $this->formRow($cancelar);
+    ?>
+</div>
+
+<?php
+// echo $this->form()->openTag($form);
+// echo $this->formCollection($form);
+// echo $this->form()->closeTag();
+?>

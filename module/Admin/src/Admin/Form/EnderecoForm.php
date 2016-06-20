@@ -172,7 +172,7 @@ class EnderecoForm extends Form {
 
         $this->add(array(
             'name' => 'informacao_referencia',
-            'type' => 'text',
+            'type' => 'textarea',
             'options' => array(
                 'label' => 'informação de referencia*:'
             ),

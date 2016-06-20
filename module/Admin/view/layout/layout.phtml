@@ -1,103 +1,142 @@
 <?php echo $this->doctype(); ?>
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
-        <?php
-        echo $this->headMeta()
-                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ?>
+    <?php
+    echo $this->headMeta()
+    ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+    ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
 
-        <!-- Le styles -->
-        <?php
-        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                ->prependStylesheet($this->basePath('css/style.css'))
-                ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-                ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
-        ?>
+    <!-- Le styles -->
+    <?php
+    echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+    ->prependStylesheet($this->basePath('css/style.css'))
+    ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+    ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+    ->prependStylesheet($this->basePath('css/simple-sidebar.css'))
+                //->prependStylesheet($this->basePath('css/produtos.css'))
+    ?>
 
-        <!-- Scripts -->
-        <?php
-        echo $this->headScript()
-                ->prependFile($this->basePath('js/bootstrap.min.js'))
-                ->prependFile($this->basePath('js/jquery.min.js'))
-                ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
-                ->prependFile($this->basePath('js/html5shiv.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
-        ;
-        ?>
+    <!-- Scripts -->
+    <?php
+    echo $this->headScript()
+    ->prependFile($this->basePath('js/bootstrap.min.js'))
+    ->prependFile($this->basePath('js/jquery.min.js'))
+    ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+    ->prependFile($this->basePath('js/html5shiv.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+    ;
+    ?>
 
-    </head>
-    <body>
-
-        <!-- Inicio mensagens -->
-        <div class="container-fluid">
-            <!-- Msg Success -->
-
-            <?php if ($this->flashMessenger()->getSuccessMessages()) { ?>
-                <div class="alert alert-success center">
-                    <?php
-                    foreach ($this->flashMessenger()->getSuccessMessages() as $msg) {
-                        echo $msg;
-                    }
-                    ?>
-                </div>
-            <?php } ?>
-
-            <!-- Msg Error -->
-
-            <?php if ($this->flashMessenger()->getErrorMessages()) { ?>
-                <div class="alert alert-danger center">
-                    <?php
-                    foreach ($this->flashMessenger()->getErrorMessages() as $msg) {
-                        echo $msg;
-                    }
-                    ?>
-                </div>
-            <?php } ?>
-
-            <!-- Msg Infos -->
-
-            <?php if ($this->flashMessenger()->getInfoMessages()) { ?>
-                <div class="alert alert-info center">
-                    <?php
-                    foreach ($this->flashMessenger()->getInfoMessages() as $msg) {
-                        echo $msg;
-                    }
-                    ?>
-                </div>
-            <?php } ?>
-        </div>
-        <!-- Fim mensagens -->
-        
-        <!-- Inicio Menu -->
+</head>
+<body>
+    <div id="wrapper">
 
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
+
+                <div class="navbar-header  collapse navbar-collapse teste">
+                    <a class="navbar-brand teste" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Cezão Equipamentos') ?></a>
                 </div>
-                <div class="collapse navbar-collapse">
+                <div class="collapse navbar-collapse teste">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                        <li><a href="<?php echo '/application/auth/login' ?>"><?php echo $this->translate('Entrar') ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
-            </div>
-        </nav>
-        <div class="container">
-            <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
-            </footer>
-        </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
-    </body>
-</html>
+
+                <!-- Menu Lateral -->
+
+                <!-- Sidebar -->
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                       <!--     <li class="sidebar-brand">
+                                <a href="#"> Administração
+                                </a>
+                            </li> -->
+                            <li>
+                                <a href="/admin/marcas/index">Marca</a>
+                            </li>
+                            <li>
+                                <a href="/admin/subcategorias/index">Subcategoria</a>
+                            </li>
+                            <li>
+                                <a href="/admin/categorias/index">Categoria</a>
+                            </li>
+                            <li>
+                                <a href="/admin/tipo-enderecos/index">Tipo Endereço</a>
+                            </li>
+                            <li>
+                                <a href="/admin/enderecos/index">Endereço</a>
+                            </li>
+                            <li>
+                                <a href="/admin/produtos/index">Produtos</a>
+                            </li>
+                            <li>
+                                <a href="/auth/users/index">Usuários</a>
+                            </li>
+                            <li>
+                                <a href="/application/auth/login">Login</a>
+                            </li>
+                            <li>
+                                <a href="/application/auth/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Msg Success -->
+            <div class="container-fluid">
+                <!-- Msg Success -->
+
+                <?php if ($this->flashMessenger()->getSuccessMessages()) { ?>
+                    <div class="alert alert-success center">
+                        <?php
+                        foreach ($this->flashMessenger()->getSuccessMessages() as $msg) {
+                            echo $msg;
+                        }
+                        ?>
+                    </div>
+                    <?php } ?>
+
+                    <!-- Msg Error -->
+
+                    <?php if ($this->flashMessenger()->getErrorMessages()) { ?>
+                        <div class="alert alert-danger center">
+                            <?php
+                            foreach ($this->flashMessenger()->getErrorMessages() as $msg) {
+                                echo $msg;
+                            }
+                            ?>
+                        </div>
+                        <?php } ?>
+
+                        <!-- Msg Infos -->
+
+                        <?php if ($this->flashMessenger()->getInfoMessages()) { ?>
+                            <div class="alert alert-info center">
+                                <?php
+                                foreach ($this->flashMessenger()->getInfoMessages() as $msg) {
+                                    echo $msg;
+                                }
+                                ?>
+                            </div>
+                            <?php } ?>
+                        </div>
+
+                        <div class="container"><!--Usar container ou content -->
+                            <?php echo $this->content; ?>
+                            <hr>
+                            <footer>
+                                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                            </footer>
+                        </div> <!-- /container -->
+                        <?php echo $this->inlineScript() ?>
+                    </div>
+                </body>
+                </html>
