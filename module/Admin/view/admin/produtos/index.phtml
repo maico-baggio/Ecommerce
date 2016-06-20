@@ -12,7 +12,6 @@
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Sub Categoria</th>
-                <th>Categoria</th>
                 <th>Valor</th>
             </tr>
         </thead>
@@ -29,16 +28,15 @@
                     <td><?= $produto->marca->descricao; ?></td>
                     <td><?= $produto->modelo->descricao; ?></td>
                     <td><?= $produto->subcategoria->descricao; ?></td>
-                    <td><?= $produto->categorias->descricao; ?></td>
                     <td><?= $produto->valor; ?></td>
 
                     <td> <a href="/admin/produtos/update/id/<?= $produto->id_produto ?>">
-                        <span class="glyphicon glyphicon-pencil" title="Excluir registro"></span> </a></td>
+                        <span class="glyphicon glyphicon-pencil" title="Editar registro"></span> </a>
 
-                        <td> <a href="/admin/produtos/delete/id/<?= $produto->id_produto ?>">
-                            <span class="glyphicon glyphicon-trash" title="Editar registro"></span> </a></td>
-                            <td> <a href="/admin/produtos/visualizar/id/<?= $produto->id_produto ?>">
-                                <span class="glyphicon glyphicon-eye-open" title="vizualizar registro"></span> </a></td>
+                         <a href="/admin/produtos/delete/id/<?= $produto->id_produto ?>">
+                            <span class="glyphicon glyphicon-trash" title="Excluir registro"></span> </a>
+                             <a href="/admin/produtos/visualizar/id/<?= $produto->id_produto ?>">
+                                <span class="glyphicon glyphicon-eye-open" title="Vizualizar registro"></span> </a></td>
                             </tr>
                             <?php } ?>
                         </tbody>
